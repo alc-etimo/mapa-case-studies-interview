@@ -6,14 +6,14 @@
     <title>MAPA Case Studies · Ariane Lesnyak</title>
     <meta name="description" content="Case study assessment for Translation Project Coordinator at MAPA Translations." />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts (fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
     <style>
         /* ============================================================
-        CUSTOM FONTS
+        CUSTOM FONTS (local fallback)
         ============================================================ */
         @font-face {
             font-family: 'Fiona Regular';
@@ -53,6 +53,18 @@
             font-weight: 300;
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
         }
 
         /* ============================================================
@@ -214,6 +226,25 @@
             border-radius: 2px;
             transition: .3s;
             opacity: .85;
+        }
+
+        .presentation-toggle {
+            background: transparent;
+            border: 1px solid #cb8316;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #cb8316;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .presentation-toggle:hover {
+            background: #cb8316;
+            color: #ffffff;
         }
 
         /* Menu overlay */
@@ -453,6 +484,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
             border: 1px solid #e8e0e4;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 100px;
         }
 
         .case-item:hover {
@@ -500,6 +532,44 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Coordinator's Call */
+        .coordinator-call {
+            background: #2d1f35;
+            color: #ffffff;
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coordinator-call::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: #cb8316;
+        }
+
+        .coordinator-call-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #e5b45d;
+            margin-bottom: 0.35rem;
+        }
+
+        .coordinator-call-text {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+            line-height: 1.45;
+            letter-spacing: 0.3px;
+        }
+
+        /* Case grid 2 columns */
         .case-grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -571,6 +641,10 @@
             color: #6d1e91;
             transition: background 0.3s;
             user-select: none;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
         }
 
         .collapsible-header:hover {
@@ -594,7 +668,8 @@
         }
 
         .collapsible-content.open {
-            max-height: 2000px;
+            max-height: 0;
+            /* set dynamically via JS */
             padding: 1rem 1.5rem 1.5rem;
         }
 
@@ -647,6 +722,35 @@
         .status-badge.confirm {
             background: #feebc8;
             color: #744210;
+        }
+
+        .status-badge.conditional {
+            background: #feebc8;
+            color: #744210;
+        }
+
+        .status-badge.critical {
+            background: #fed7d7;
+            color: #7b341e;
+            border: 1px solid #c0392b;
+        }
+
+        .status-badge.committed {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #2f855a;
+        }
+
+        /* Table scroll wrapper */
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .table-scroll table {
+            min-width: 680px;
         }
 
         /* Message boxes */
@@ -706,7 +810,41 @@
             font-weight: 500;
         }
 
-        /* Risk table */
+        .ai-appendix .ai-full {
+            grid-column: 1 / -1;
+        }
+
+        .ai-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #6d1e91;
+            margin-bottom: 0.25rem;
+        }
+
+        .ai-content {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: #4a4a4a;
+        }
+
+        .ai-rejected {
+            border-left: 3px solid #c0392b;
+            padding-left: 0.8rem;
+        }
+
+        .ai-verified {
+            border-left: 3px solid #2f855a;
+            padding-left: 0.8rem;
+        }
+
+        .ai-human {
+            border-left: 3px solid #cb8316;
+            padding-left: 0.8rem;
+        }
+
+        /* Risk grid */
         .risk-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -737,13 +875,281 @@
             margin-top: 0.2rem;
         }
 
+        /* Fact / Unknown / Decision */
+        .fud-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .fud-card {
+            border: 1px solid #e8e0e4;
+            border-radius: 12px;
+            padding: 1rem;
+            background: #fff;
+        }
+
+        .fud-card.fact {
+            border-top: 4px solid #2f855a;
+        }
+
+        .fud-card.unknown {
+            border-top: 4px solid #cb8316;
+        }
+
+        .fud-card.decision {
+            border-top: 4px solid #6d1e91;
+        }
+
+        .fud-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #6d1e91;
+        }
+
+        .fud-content {
+            font-size: 0.9rem;
+            color: #4a4a4a;
+            margin-top: 0.3rem;
+        }
+
+        /* Scope flow */
+        .scope-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .scope-flow div {
+            padding: .65rem 1rem;
+            border: 1px solid #d8cbdc;
+            border-radius: 999px;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: .7rem;
+            letter-spacing: 1px;
+            background: #fff;
+        }
+
+        .scope-flow .scope-final {
+            background: #6d1e91;
+            color: #fff;
+            border-color: #6d1e91;
+        }
+
+        .scope-flow .arrow {
+            color: #6d1e91;
+            font-size: 1.2rem;
+        }
+
+        /* Dependency timeline */
+        .dependency-timeline {
+            background: #f8f5f4;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #e8e0e4;
+            margin: 1.5rem 0;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6d1e91;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-track {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            font-size: 0.8rem;
+            color: #4a4a4a;
+            padding: 0.5rem 0;
+        }
+
+        .timeline-track .tl-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-track .tl-time {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.7rem;
+            color: #6d1e91;
+            min-width: 70px;
+        }
+
+        .timeline-track .tl-event {
+            font-size: 0.85rem;
+        }
+
+        .timeline-track .tl-arrow {
+            color: #cb8316;
+            font-size: 0.8rem;
+        }
+
+        .timeline-cutoff {
+            background: #fff5f4;
+            border-left: 4px solid #c0392b;
+            padding: .7rem 1rem;
+            margin: 0.5rem 0 0;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+        }
+
+        .timeline-cutoff span {
+            display: block;
+            color: #c0392b;
+            font-size: .7rem;
+            letter-spacing: 1px;
+        }
+
+        .timeline-cutoff strong {
+            font-size: 1rem;
+            color: #2d2d2d;
+        }
+
+        .timeline-buffer {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .hard-cutoff {
+            border-left: 4px solid #c0392b;
+            padding: .7rem 1rem;
+            margin: 1rem 0;
+            background: #fff5f4;
+        }
+
+        .hard-cutoff span {
+            display: block;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            color: #c0392b;
+            font-size: .7rem;
+            letter-spacing: 1px;
+        }
+
+        .hard-cutoff strong {
+            font-size: 1rem;
+        }
+
+        /* Priority matrix */
+        .priority-matrix {
+            background: #f8f5f4;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #e8e0e4;
+            margin: 1.5rem 0;
+        }
+
+        .matrix-y {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6d1e91;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .matrix-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6d1e91;
+        }
+
+        .matrix-label.top {
+            text-align: center;
+        }
+
+        .matrix-cell {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            justify-content: center;
+            padding: 0.5rem;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e8e0e4;
+        }
+
+        .matrix-item {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid #e8e0e4;
+        }
+
+        .matrix-item.a {
+            background: #c6f6d5;
+            border-color: #2f855a;
+            color: #22543d;
+        }
+
+        .matrix-item.b {
+            background: #c6f6d5;
+            border-color: #2f855a;
+            color: #22543d;
+        }
+
+        .matrix-item.c {
+            background: #feebc8;
+            border-color: #cb8316;
+            color: #744210;
+        }
+
+        .matrix-item.d {
+            background: #fed7d7;
+            border-color: #c0392b;
+            color: #7b341e;
+        }
+
+        .matrix-item.uncommitted {
+            background: #e8e0e4;
+            border-color: #888;
+            color: #666;
+            opacity: 0.7;
+        }
+
+        .matrix-x {
+            grid-column: span 3;
+            text-align: center;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6d1e91;
+            margin-top: 0.5rem;
+        }
+
         /* ============================================================
-        FOOTER
+        FOOTER (assessment-oriented)
         ============================================================ */
         .footer-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 220px;
+            min-height: 120px;
         }
 
         .footer-left {
@@ -751,22 +1157,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2.5rem 2rem;
+            padding: 1.5rem 2rem;
         }
 
-        .footer-left a {
-            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
-            font-size: 32px;
-            line-height: 40.9px;
-            letter-spacing: 9px;
-            color: #fff;
-            text-decoration: none;
+        .footer-left p {
+            font-family: 'Acherus Grotesque Light', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 100%;
             text-align: center;
-            transition: opacity .3s;
-        }
-
-        .footer-left a:hover {
-            opacity: .7;
+            margin: 0;
         }
 
         .footer-right {
@@ -774,7 +1174,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding: 2.5rem 3rem 2.5rem 2.5rem;
+            padding: 1.5rem 3rem 1.5rem 2.5rem;
         }
 
         .footer-right ul {
@@ -786,8 +1186,8 @@
         .footer-right ul li {
             font-family: 'Playfair Display', 'Georgia', serif;
             font-style: italic;
-            font-size: 18px;
-            line-height: 27.4px;
+            font-size: 16px;
+            line-height: 24px;
             letter-spacing: .9px;
             color: #000;
             padding: .15rem 0;
@@ -805,28 +1205,99 @@
 
         .footer-bottom {
             background: #D6D0D4;
-            padding: 1.5rem 2rem;
+            padding: 0.8rem 2rem;
             text-align: center;
             border-top: 1px solid rgba(0, 0, 0, .05);
         }
 
         .footer-bottom p {
-            font-size: 1rem;
-            color: #2d2d2d;
+            font-size: 0.85rem;
+            color: #4a4a4a;
             max-width: 100%;
             margin: 0;
         }
 
         .footer-bottom .small {
-            font-size: .85rem;
+            font-size: 0.75rem;
             color: #6d1e91;
-            margin-top: .3rem;
+            margin-top: 0.2rem;
         }
 
         .footer-bottom .tiny {
-            font-size: .75rem;
+            font-size: 0.7rem;
             color: #888;
-            margin-top: .2rem;
+            margin-top: 0.2rem;
+        }
+
+        /* ============================================================
+        PRESENTATION MODE
+        ============================================================ */
+        .presentation-mode .navbar {
+            position: fixed;
+            opacity: 0.15;
+            transition: opacity .2s;
+        }
+
+        .presentation-mode .navbar:hover {
+            opacity: 1;
+        }
+
+        .presentation-mode .footer-split,
+        .presentation-mode .footer-bottom {
+            display: none;
+        }
+
+        .presentation-mode .case-item {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+        }
+
+        /* ============================================================
+        PRINT / PDF MODE
+        ============================================================ */
+        @media print {
+            .navbar,
+            .navbar-hamburger,
+            .footer-split,
+            .presentation-toggle,
+            .menu-overlay,
+            .menu-box {
+                display: none !important;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .case-item {
+                box-shadow: none;
+                break-inside: avoid;
+                border: 1px solid #ddd;
+            }
+
+            .collapsible-content {
+                max-height: none !important;
+                overflow: visible !important;
+                padding: 1rem 1.5rem !important;
+            }
+
+            .collapsible-header {
+                display: none;
+            }
+
+            .ai-appendix {
+                break-before: page;
+            }
+
+            .hero {
+                min-height: 50vh;
+                background-size: cover;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
         }
 
         /* ============================================================
@@ -849,13 +1320,17 @@
                 grid-template-columns: 1fr;
             }
 
+            .fud-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
             .footer-split {
                 grid-template-columns: 1fr;
             }
 
             .footer-right {
                 justify-content: center;
-                padding: 2rem;
+                padding: 1.5rem;
             }
         }
 
@@ -915,19 +1390,25 @@
                 padding: 0.4rem 0.6rem;
             }
 
+            .table-scroll table {
+                min-width: 640px;
+            }
+
             .message-box p {
                 font-size: 0.85rem;
             }
 
-            .footer-left a {
-                font-size: 24px;
-                line-height: 30px;
-                letter-spacing: 6px;
+            .fud-grid {
+                grid-template-columns: 1fr;
             }
 
-            .footer-right ul li {
-                font-size: 16px;
-                line-height: 24px;
+            .scope-flow {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .scope-flow .arrow {
+                transform: rotate(90deg);
             }
 
             .menu-box {
@@ -995,7 +1476,7 @@
             }
 
             .ai-appendix .ai-grid {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
 
             .risk-item .risk-label {
@@ -1005,18 +1486,42 @@
             .risk-item .risk-action {
                 font-size: 0.75rem;
             }
+
+            .coordinator-call {
+                padding: 1rem 1.2rem;
+            }
+
+            .coordinator-call-text {
+                font-size: 0.9rem;
+            }
+
+            .matrix-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .matrix-x {
+                grid-column: span 1;
+            }
+
+            .matrix-label.top {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- ============================================================
+    NAVBAR
+    ============================================================ -->
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
             <div class="navbar-logo">
                 <img src="https://github.com/alc-etimo/mapa/blob/main/logo.png?raw=true" alt="Ariane Lesnyak" />
             </div>
             <div class="navbar-right">
+                <button class="presentation-toggle" id="presentationToggle">PRESENT</button>
                 <span class="navbar-sections" id="menuToggle">SECTIONS</span>
                 <div class="navbar-hamburger" id="hamburgerToggle">
                     <span></span><span></span><span></span>
@@ -1028,10 +1533,11 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="menu-box" id="menuBox">
         <button class="menu-close" id="menuClose">✕</button>
-        <a href="#top">HOME</a>
-        <a href="#intro">APPROACH</a>
-        <a href="#cases">CASES</a>
-        <a href="#footer">CONTACT</a>
+        <a href="#top">OVERVIEW</a>
+        <a href="#case-1">CASE 01</a>
+        <a href="#case-2">CASE 02</a>
+        <a href="#case-3">CASE 03</a>
+        <a href="#case-1-ai">AI</a>
     </div>
 
     <!-- ============================================================
@@ -1045,7 +1551,7 @@
                 Three scenarios.<br />
                 One consistent approach.
             </p>
-            <a href="#cases" class="btn-hero">Explore the Cases</a>
+            <a href="#intro" class="btn-hero">Explore the Cases</a>
         </div>
         <div class="hero-curve"></div>
     </section>
@@ -1088,12 +1594,20 @@
             <!-- ============================================================
             CASE 1 — INTAKE & SCOPE
             ============================================================ -->
-            <div class="case-item reveal">
+            <div class="case-item" id="case-1">
                 <div class="case-header">
                     <span class="case-number">Case 01</span>
                     <span class="case-title">Intake &amp; Scope</span>
                 </div>
                 <p class="case-subtitle">"A new client, a fast quote, and a folder of files that do not quite add up"</p>
+
+                <!-- Coordinator's Call -->
+                <div class="coordinator-call">
+                    <div class="coordinator-call-label">Coordinator's Call</div>
+                    <div class="coordinator-call-text">
+                        DO NOT ISSUE A FIRM QUOTE UNTIL SOURCE, SCOPE AND DELIVERY REQUIREMENTS ARE CONFIRMED.
+                    </div>
+                </div>
 
                 <!-- The Real Problem -->
                 <div style="margin-bottom:1rem;">
@@ -1101,85 +1615,180 @@
                         <span class="box-label" style="color:#6d1e91;">🔴 The real problem</span>
                         <p style="font-size:0.95rem;">
                             <strong>Surface request:</strong> "send a quote today."<br />
-                            <strong>Actual problem:</strong> inconsistent file inventory, a confidential document sent without being requested, a version conflict between two annual report files, and a Vietnamese MT request that conflicts with company policy.
+                            <strong>Actual problem:</strong> inconsistent file inventory, a confidential document sent without being requested, a version conflict between two annual report files, and a Vietnamese MT request that introduces a quality/workflow trade-off.
                         </p>
                     </div>
                 </div>
 
                 <!-- Scope Decision Table -->
                 <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapse(this)">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case1-scope-content">
                         📋 Scope Decision Table
                         <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case1-scope-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead>
+                                    <tr><th>File</th><th>Status</th><th>Decision</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Annual Report FINAL</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Conflicting source version</td></tr>
+                                    <tr><td>Annual Report v3</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Later modification ≠ approval</td></tr>
+                                    <tr><td>Appendix A Financials</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Scanned + handwritten content</td></tr>
+                                    <tr><td>Program Photos Captions</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Confirm tabs; exclude DO NOT USE</td></tr>
+                                    <tr><td>Board Roster</td><td><span class="status-badge out">OUT</span></td><td>Unrequested confidential material</td></tr>
+                                    <tr><td>Executive Summary</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Overlap + changed figures</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="collapsible-content">
-                        <table>
-                            <thead>
-                                <tr><th>File</th><th>Decision</th><th>Reason</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>RCHC_Annual_Report_2025_FINAL.docx</td><td><span class="status-badge confirm">Needs confirmation</span></td><td>v3 is more recent</td></tr>
-                                <tr><td>RCHC_Annual_Report_2025_v3.docx</td><td><span class="status-badge confirm">Needs confirmation</span></td><td>Assume pending client confirmation</td></tr>
-                                <tr><td>Appendix_A_Financials.pdf</td><td><span class="status-badge in">In scope</span></td><td>Typed tables in; handwritten notes need clarification</td></tr>
-                                <tr><td>Program_Photos_Captions.xlsx</td><td><span class="status-badge in">In scope</span></td><td>Tabs 1 &amp; 2; Tab 3 "DO NOT USE" excluded</td></tr>
-                                <tr><td>Board_Roster_CONFIDENTIAL.pdf</td><td><span class="status-badge out">Quarantine</span></td><td>Not mentioned; confidential — flag to client</td></tr>
-                                <tr><td>RCHC_Exec_Summary.docx</td><td><span class="status-badge in">In scope</span></td><td>Flag figure discrepancies</td></tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Assumptions & Clarifications -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case1-assumptions-content">
+                        📌 Assumptions &amp; Clarifications
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case1-assumptions-content" role="region">
+                        <p style="font-size:0.85rem; font-weight:600; color:#6d1e91; margin-bottom:0.5rem;">Working assumptions</p>
+                        <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0; margin-bottom:1rem;">
+                            <li style="margin-bottom:0.3rem;"><strong>A1</strong> — Friday's board date is treated as a stakeholder milestone, not a confirmed translation deadline.</li>
+                            <li style="margin-bottom:0.3rem;"><strong>A2</strong> — The later modification date on v3 does not establish client approval; the approved source must be confirmed.</li>
+                            <li style="margin-bottom:0.3rem;"><strong>A3</strong> — The Board Roster is out of scope unless explicitly requested.</li>
+                            <li style="margin-bottom:0.3rem;"><strong>A4</strong> — The Executive Summary may represent revised/overlapping content rather than automatically adding 900 words to scope.</li>
+                            <li style="margin-bottom:0.3rem;"><strong>A5</strong> — The standard linguistic workflow remains the baseline unless an alternative workflow is explicitly agreed.</li>
+                        </ul>
+                        <p style="font-size:0.85rem; font-weight:600; color:#6d1e91; margin-bottom:0.5rem;">Questions for Nadia</p>
+                        <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0;">
+                            <li style="margin-bottom:0.3rem;"><strong>Q1</strong> — Which Annual Report file is the approved source: FINAL or v3?</li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q2</strong> — What is the actual translation delivery date/time? Is Friday the translation deadline or only the board-packet date?</li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q3</strong> — Is the Executive Summary a separate deliverable, a replacement/update to part of the report, or additional content?</li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q4</strong> — Should the handwritten notes in Appendix A be included in translation scope?</li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q5</strong> — Which tabs/content in the captions workbook should be translated?</li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q6</strong> — For Vietnamese, are you requesting an alternative QA workflow, or should we maintain the standard translation + second-linguist review process?</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Action Plan -->
                 <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapse(this)">
-                        📌 Prioritized Action Plan
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case1-action-content">
+                        ⏱️ Action Plan
                         <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case1-action-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead><tr><th>Time</th><th>Action</th></tr></thead>
+                                <tbody>
+                                    <tr><td>2:15–2:30</td><td>Acknowledge Nadia's update; log the Executive Summary; preserve all received versions in the project-management system.</td></tr>
+                                    <tr><td>2:30–3:00</td><td>Compare Annual Report versions at a high level; flag material differences without selecting a source unilaterally.</td></tr>
+                                    <tr><td>3:00–3:20</td><td>Compare Executive Summary against the report; flag overlap and changed figures as a scope/version dependency.</td></tr>
+                                    <tr><td>3:20–3:40</td><td>Send targeted clarification questions to Nadia with a response deadline.</td></tr>
+                                    <tr><td>3:40–4:00</td><td>Confirm resource feasibility, especially Vietnamese lead time.</td></tr>
+                                    <tr><td>4:00–4:30</td><td>Build provisional scope/word-count/cost model and identify scanned-content, chart and DTP implications.</td></tr>
+                                    <tr><td>EOD</td><td>Issue a firm quote only if gating information is confirmed; otherwise issue a conditional quote with explicit assumptions.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="collapsible-content">
-                        <table>
-                            <thead><tr><th>#</th><th>Action</th><th>Why</th></tr></thead>
-                            <tbody>
-                                <tr><td>1</td><td>Quarantine Board Roster</td><td>Do not enter into any system</td></tr>
-                                <tr><td>2</td><td>Identify correct source file (FINAL vs v3)</td><td>Cannot quote without confirming</td></tr>
-                                <tr><td>3</td><td>Flag Exec Summary overlap + changed figures</td><td>Version conflict or intentional revision</td></tr>
-                                <tr><td>4</td><td>Assess Appendix PDF scope (handwritten notes)</td><td>Non-standard; needs scope decision</td></tr>
-                                <tr><td>5</td><td>Complete scope decision table</td><td>Clear scope before quoting</td></tr>
-                                <tr><td>6</td><td>Reply to Nadia — same-day response</td><td>Client expects quick turn</td></tr>
-                                <tr><td>7</td><td>Prepare quote with standard + accelerated options</td><td>Address budget concerns</td></tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Scope Flow -->
+                <div class="scope-flow">
+                    <div>FILES RECEIVED</div>
+                    <span class="arrow">↓</span>
+                    <div>SOURCE VALIDATION</div>
+                    <span class="arrow">↓</span>
+                    <div>SCOPE CONFIRMATION</div>
+                    <span class="arrow">↓</span>
+                    <div>RESOURCE CHECK</div>
+                    <span class="arrow">↓</span>
+                    <div class="scope-final">QUOTE</div>
+                </div>
+
+                <!-- Quality Controls -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case1-quality-content">
+                        ✅ Quality &amp; File Controls
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case1-quality-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead><tr><th>Control</th><th>Purpose</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Approved-source lock</td><td>Production begins only against the confirmed source package.</td></tr>
+                                    <tr><td>Version register</td><td>Record the approved source and superseded versions in the project-management system.</td></tr>
+                                    <tr><td>Scope-controlled file package</td><td>Keep unrequested/confidential material outside the production package.</td></tr>
+                                    <tr><td>Scanned-content verification</td><td>Human verification of handwritten notes and image/chart text.</td></tr>
+                                    <tr><td>Linguistic QA workflow</td><td>Qualified linguist → second linguist → internal check unless an alternative is explicitly agreed.</td></tr>
+                                    <tr><td>Final source-to-delivery check</td><td>Verify deliverables against the approved source package before release.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Message to Client -->
                 <div class="message-box">
-                    <span class="msg-label">✉️ Reply to Nadia (max 200 words)</span>
+                    <span class="msg-label">✉️ Reply to Nadia</span>
                     <p>
                         <em>"Thank you for reaching out. Before I send a quote, a few quick questions: 1) Which version of the annual report should I use? 2) The Executive Summary has overlap with different figures — single project or separate? 3) I received a 'Board Roster — CONFIDENTIAL' not mentioned — was this intentional? On Vietnamese: I'd recommend a brief conversation before quoting that approach — there are quality and liability considerations. I can have a quote to you within two hours of your reply."</em>
                     </p>
                 </div>
 
-                <!-- Risks -->
-                <div style="margin:1rem 0;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold',sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">⚠️ Key Risks</h5>
-                    <div class="risk-grid">
-                        <div class="risk-item"><span class="risk-label">🔴 Board Roster</span><span class="risk-action">Quarantine; not mentioned in email</span></div>
-                        <div class="risk-item"><span class="risk-label">🔴 Two versions</span><span class="risk-action">Cannot quote without confirming source</span></div>
-                        <div class="risk-item"><span class="risk-label">🟡 Vietnamese MT</span><span class="risk-action">Conflicts with company policy</span></div>
-                        <div class="risk-item"><span class="risk-label">🟠 Scanned PDF</span><span class="risk-action">Handwritten notes — need scope decision</span></div>
-                    </div>
-                </div>
-
                 <!-- AI Appendix -->
-                <div class="ai-appendix">
+                <div class="ai-appendix" id="case-1-ai">
                     <h5>🤖 AI Use Appendix — Case 1</h5>
                     <div class="ai-grid">
-                        <div><strong>Tool:</strong> Claude (Anthropic)</div>
-                        <div><strong>Effort:</strong> 65% own / 35% AI</div>
-                        <div><strong>Useful:</strong> Flagged Board Roster and Tab 3 "DO NOT USE"</div>
-                        <div><strong>Correction 1:</strong> AI included Board Roster in scope — I quarantined and flagged neutrally</div>
-                        <div><strong>Correction 2:</strong> AI suggested quoting immediately — I require source confirmation first</div>
-                        <div><strong>Human-owned decision:</strong> Raise Vietnamese MT issue in first reply — client's Friday deadline makes a second delay costly</div>
+                        <div><strong>Tool:</strong> ChatGPT-4</div>
+                        <div><strong>Effort:</strong> 65% human / 35% AI</div>
+
+                        <div class="ai-full">
+                            <div class="ai-label">Prompt</div>
+                            <div class="ai-content" style="background:#fff; padding:0.5rem 0.8rem; border-radius:6px; font-size:0.85rem; color:#555;">
+                                "Analyze this file inventory and identify risks, ambiguities, and scope issues. Draft a reply to the client with the necessary questions. Max 200 words."
+                            </div>
+                        </div>
+
+                        <div class="ai-full">
+                            <div class="ai-label">Useful Output</div>
+                            <div class="ai-content">
+                                <ul style="list-style:none; padding:0; margin:0;">
+                                    <li>• Flagged Board Roster as a confidentiality issue</li>
+                                    <li>• Identified Tab 3 "DO NOT USE" as an exclusion</li>
+                                    <li>• Drafted Nadia reply structure quickly</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 1</div>
+                            <div class="ai-content">AI treated the later-modified v3 file as potentially authoritative; I rejected that conclusion because modification date does not establish approval.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 2</div>
+                            <div class="ai-content">AI initially treated the Executive Summary as additional scope; I reframed it as a version/scope dependency because it overlaps the report and changes figures.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 3</div>
+                            <div class="ai-content">AI treated Vietnamese MT as a policy conflict; I corrected this to a quality/workflow trade-off because the packet does not prohibit MTPE.</div>
+                        </div>
+
+                        <div class="ai-full ai-verified">
+                            <div class="ai-label">Verification</div>
+                            <div class="ai-content">Factual claims were checked against the Candidate Packet. No external facts were used to resolve the fictional scenarios. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
+                        </div>
+
+                        <div class="ai-full ai-human">
+                            <div class="ai-label">Human-Owned Judgment</div>
+                            <div class="ai-content">Whether to issue a firm or conditional quote.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1187,12 +1796,20 @@
             <!-- ============================================================
             CASE 2 — VERSION CONTROL
             ============================================================ -->
-            <div class="case-item reveal">
+            <div class="case-item" id="case-2">
                 <div class="case-header">
                     <span class="case-number">Case 02</span>
                     <span class="case-title">Version Control &amp; Conflicting Review</span>
                 </div>
                 <p class="case-subtitle">"A late client review, a legal instruction, and a print deadline that does not move"</p>
+
+                <!-- Coordinator's Call -->
+                <div class="coordinator-call">
+                    <div class="coordinator-call-label">Coordinator's Call</div>
+                    <div class="coordinator-call-text">
+                        PROTECT THE THURSDAY PRESS CUTOFF BY RESOLVING HIGH-RISK DECISIONS FIRST AND COMPLETING ALL DTP WEDNESDAY.
+                    </div>
+                </div>
 
                 <!-- The Real Problem -->
                 <div style="margin-bottom:1rem;">
@@ -1205,38 +1822,88 @@
                     </div>
                 </div>
 
-                <!-- Go/No-Go Timeline -->
-                <div style="margin:1rem 0; background:#f8f5f4; border-radius:12px; padding:1rem; border:1px solid #e8e0e4;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold',sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">⏱️ Go/No-Go Timeline (Wednesday–Thursday)</h5>
-                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:0.5rem; font-size:0.85rem;">
-                        <div style="background:#fff; padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #e8e0e4;"><strong>10:15</strong> Email Grant</div>
-                        <div style="background:#fff; padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #e8e0e4;"><strong>10:20</strong> Triage 31 comments</div>
-                        <div style="background:#fff; padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #e8e0e4;"><strong>10:30</strong> Send clear errors to Pavel</div>
-                        <div style="background:#6d1e91; color:#fff; padding:0.4rem 0.8rem; border-radius:6px; font-weight:600;"><strong>2:00 PM</strong> GO/NO-GO</div>
-                        <div style="background:#fff; padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #e8e0e4;"><strong>6:00 PM</strong> Pavel completes DTP</div>
-                        <div style="background:#fff; padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #e8e0e4;"><strong>9:00 PM</strong> Press-ready PDFs</div>
+                <!-- Prioritization Logic -->
+                <div class="case-box" style="background:#f8f5f4; border-color:#cb8316;">
+                    <span class="box-label" style="color:#cb8316;">🎯 Prioritization Logic</span>
+                    <p style="font-size:0.9rem;">
+                        The binding constraint is Northline's Thursday 12 PM ET cutoff. Because Pavel is unavailable Thursday before 1 PM, all production DTP must be completed Wednesday. Therefore, I resolve decisions that can block DTP first, while preserving Thursday morning for QA/recovery rather than planned production.
+                    </p>
+                </div>
+
+                <!-- Dependency Timeline -->
+                <div class="dependency-timeline">
+                    <div class="timeline-header">
+                        <span>WEDNESDAY</span>
+                        <span>THURSDAY</span>
                     </div>
-                    <p style="font-size:0.8rem; color:#777; margin-top:0.5rem;">Pavel unavailable Thursday before 1:00 PM — all DTP must finish Wednesday.</p>
+                    <div class="timeline-track">
+                        <div class="tl-row"><span class="tl-time">10:15</span><span class="tl-event">Grant clarification</span></div>
+                        <div class="tl-row"><span class="tl-time">10:20</span><span class="tl-event">Comment triage</span></div>
+                        <div class="tl-row"><span class="tl-time">10:30</span><span class="tl-event">DTP batch 1</span></div>
+                        <div class="tl-row"><span class="tl-time">12:00</span><span class="tl-event">Client confirmation</span></div>
+                        <div class="tl-row"><span class="tl-time">14:00</span><span class="tl-event"><strong style="color:#6d1e91;">GO / NO-GO</strong></span></div>
+                        <div class="tl-row"><span class="tl-time">↓</span><span class="tl-arrow">→</span><span class="tl-event">DTP batch 2</span></div>
+                        <div class="tl-row"><span class="tl-time">↓</span><span class="tl-arrow">→</span><span class="tl-event">Internal QA</span></div>
+                    </div>
+                    <div class="timeline-cutoff">
+                        <span>THU 12:00 PM ET</span>
+                        <strong>HARD CUTOFF</strong>
+                    </div>
+                    <div class="timeline-buffer">
+                        Thursday AM = QA / recovery buffer, not planned DTP capacity.
+                    </div>
+                </div>
+
+                <!-- Hard Cutoff Visual -->
+                <div class="hard-cutoff">
+                    <span>THU 12:00 PM ET</span>
+                    <strong>HARD CUTOFF — Northline press run</strong>
                 </div>
 
                 <!-- Triage -->
                 <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapse(this)">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case2-triage-content">
                         📊 Triage — Camila's 31 Comments
                         <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case2-triage-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead><tr><th>Category</th><th>Count</th><th>Action</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Clear errors</td><td>6</td><td>Implement immediately, no approval</td></tr>
+                                    <tr><td>Style preferences (not glossary)</td><td>14</td><td>Flag to Grant; his call</td></tr>
+                                    <tr><td>Style overriding approved glossary</td><td>5</td><td>Hold; need written client override</td></tr>
+                                    <tr><td>Contradictory comments</td><td>4</td><td>Flag to Camila; implement neither</td></tr>
+                                    <tr><td>Safety warning softening</td><td>1</td><td><span class="danger">Hard stop — written approval required</span></td></tr>
+                                    <tr><td>Legal line (Grant)</td><td>1</td><td><span class="danger">Hard stop — written approval + English source update</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="collapsible-content">
-                        <table>
-                            <thead><tr><th>Category</th><th>Count</th><th>Action</th></tr></thead>
-                            <tbody>
-                                <tr><td>Clear errors</td><td>6</td><td>Implement immediately, no approval</td></tr>
-                                <tr><td>Style preferences (not glossary)</td><td>14</td><td>Flag to Grant; his call</td></tr>
-                                <tr><td>Style overriding approved glossary</td><td>5</td><td>Hold; need written client override</td></tr>
-                                <tr><td>Contradictory comments</td><td>4</td><td>Flag to Camila; implement neither</td></tr>
-                                <tr><td>Safety warning softening</td><td>1</td><td><span class="danger">Hard stop — written approval required</span></td></tr>
-                                <tr><td>Legal line (Grant)</td><td>1</td><td><span class="danger">Hard stop — written approval + English source update</span></td></tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Decision Matrix -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case2-decision-content">
+                        ⚖️ Risk / Decision Table
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case2-decision-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead><tr><th>Decision / Issue</th><th>Risk</th><th>Owner</th><th>Trigger</th><th>Action</th></tr></thead>
+                                <tbody>
+                                    <tr><td>6 objective errors</td><td>Accuracy</td><td>Linguistic reviewer</td><td>Identified</td><td>Implement + verify</td></tr>
+                                    <tr><td>5 glossary conflicts</td><td>Terminology consistency</td><td>Client decision owner</td><td>Requested override</td><td>Hold until confirmed</td></tr>
+                                    <tr><td>4 contradictory comments</td><td>Wrong implementation</td><td>Camila / Grant</td><td>No clarification</td><td>Implement neither</td></tr>
+                                    <tr><td>2 safety changes</td><td>Regulatory/quality</td><td>Grant</td><td>No written confirmation</td><td>Hold affected text</td></tr>
+                                    <tr><td>Legal wording</td><td>Cross-language consistency</td><td>Grant</td><td>Final wording unclear</td><td>Confirm before propagation</td></tr>
+                                    <tr><td>Chinese reflow</td><td>DTP delay</td><td>Pavel</td><td>Text expansion</td><td>Reserve DTP capacity</td></tr>
+                                    <tr><td>Thu 12 PM cutoff</td><td>Press-run failure</td><td>Coordinator</td><td>Work incomplete Wed</td><td>Escalate / reassess</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -1256,27 +1923,73 @@
                     </div>
                 </div>
 
-                <!-- Risks -->
-                <div style="margin:1rem 0;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold',sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">⚠️ Key Risks</h5>
-                    <div class="risk-grid">
-                        <div class="risk-item"><span class="risk-label">🔴 Safety warning</span><span class="risk-action">Not implement without written approval</span></div>
-                        <div class="risk-item"><span class="risk-label">🔴 Legal line</span><span class="risk-action">English master already in prepress — version conflict</span></div>
-                        <div class="risk-item"><span class="risk-label">🟡 Camila overrides glossary</span><span class="risk-action">Need client override</span></div>
-                        <div class="risk-item"><span class="risk-label">🟠 Pavel unavailable Thursday</span><span class="risk-action">All DTP must finish Wednesday</span></div>
+                <!-- Quality Controls -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case2-quality-content">
+                        ✅ Quality Controls
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case2-quality-content" role="region">
+                        <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0;">
+                            <li style="margin-bottom:0.3rem;">✅ Safety + legal lines: zero changes without written confirmation</li>
+                            <li style="margin-bottom:0.3rem;">✅ Glossary: no overrides without explicit client instruction</li>
+                            <li style="margin-bottom:0.3rem;">✅ Internal check before Northline delivery</li>
+                            <li style="margin-bottom:0.3rem;">✅ Version control: all files timestamped</li>
+                            <li style="margin-bottom:0.3rem;">✅ Confidential content: contracted tools only</li>
+                            <li style="margin-bottom:0.3rem;">✅ Reflow risk: reserve DTP capacity; evaluate impact</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- AI Appendix -->
-                <div class="ai-appendix">
+                <div class="ai-appendix" id="case-2-ai">
                     <h5>🤖 AI Use Appendix — Case 2</h5>
                     <div class="ai-grid">
-                        <div><strong>Tool:</strong> Claude (Anthropic)</div>
-                        <div><strong>Effort:</strong> 60% own / 40% AI</div>
-                        <div><strong>Useful:</strong> Flagged Chinese reflow dependency; drafted Grant message</div>
-                        <div><strong>Correction 1:</strong> AI grouped safety warning with style — I separated: safety is categorically different</div>
-                        <div><strong>Correction 2:</strong> AI suggested implementing legal line "pending confirmation" — I rejected; policy requires confirmation before action</div>
-                        <div><strong>Human-owned decision:</strong> Go/no-go at 2:00 PM (AI suggested 3:00) — moved earlier based on minimum DTP + internal check time</div>
+                        <div><strong>Tool:</strong> ChatGPT-4</div>
+                        <div><strong>Effort:</strong> 60% human / 40% AI</div>
+
+                        <div class="ai-full">
+                            <div class="ai-label">Prompt</div>
+                            <div class="ai-content" style="background:#fff; padding:0.5rem 0.8rem; border-radius:6px; font-size:0.85rem; color:#555;">
+                                "Analyze this scenario and structure a prioritized action plan. Triage these 31 comments by risk and approval requirements. Draft a 175-word message to the client flagging the safety and legal conflicts."
+                            </div>
+                        </div>
+
+                        <div class="ai-full">
+                            <div class="ai-label">Useful Output</div>
+                            <div class="ai-content">
+                                <ul style="list-style:none; padding:0; margin:0;">
+                                    <li>• Flagged the Chinese reflow dependency</li>
+                                    <li>• Drafted initial message to Grant quickly</li>
+                                    <li>• Helped structure the decision matrix</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 1</div>
+                            <div class="ai-content">AI grouped safety warning with stylistic preferences — I separated it: safety statements are categorically different.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 2</div>
+                            <div class="ai-content">AI suggested implementing legal line "pending confirmation" — I rejected; company policy requires confirmation before action.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 3</div>
+                            <div class="ai-content">AI scheduled DTP production Thursday — I corrected: Pavel is unavailable before 1 PM; complete production Wednesday and preserve Thursday AM for QA/recovery.</div>
+                        </div>
+
+                        <div class="ai-full ai-verified">
+                            <div class="ai-label">Verification</div>
+                            <div class="ai-content">Confirmed Pavel's Thursday unavailability from packet — built entire timeline around this. Confirmed English master was already in prepress before flagging the legal conflict as critical. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
+                        </div>
+
+                        <div class="ai-full ai-human">
+                            <div class="ai-label">Human-Owned Judgment</div>
+                            <div class="ai-content">Go/no-go time set at 2:00 PM (AI suggested 3:00). I moved it after calculating minimum DTP + internal check time.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1284,12 +1997,20 @@
             <!-- ============================================================
             CASE 3 — CAPACITY
             ============================================================ -->
-            <div class="case-item reveal">
+            <div class="case-item" id="case-3">
                 <div class="case-header">
                     <span class="case-number">Case 03</span>
                     <span class="case-title">Capacity, Silent Contractor &amp; Booked Studio</span>
                 </div>
                 <p class="case-subtitle">"Monday morning, one coordinator, four live projects, and a prospect your manager wants to win"</p>
+
+                <!-- Coordinator's Call -->
+                <div class="coordinator-call">
+                    <div class="coordinator-call-label">Coordinator's Call</div>
+                    <div class="coordinator-call-text">
+                        PROTECT COMMITTED WORK AND THE BOOKED STUDIO DEPENDENCY; PURSUE THE PROSPECT WITHOUT COMMITTING UNTIL RUSSIAN CAPACITY IS VERIFIED.
+                    </div>
+                </div>
 
                 <!-- The Real Problem -->
                 <div style="margin-bottom:1rem;">
@@ -1302,111 +2023,244 @@
                     </div>
                 </div>
 
+                <!-- Priority Matrix -->
+                <div class="priority-matrix">
+                    <div class="matrix-y">CONSEQUENCE OF FAILURE</div>
+                    <div class="matrix-grid">
+                        <div class="matrix-label top">HIGH</div>
+                        <div class="matrix-cell">
+                            <span class="matrix-item d">D</span>
+                            <span class="matrix-item a">A</span>
+                        </div>
+                        <div class="matrix-cell">
+                            <span class="matrix-item b">B</span>
+                            <span class="matrix-item c">C</span>
+                        </div>
+                        <div class="matrix-x">DEADLINE / DEPENDENCY RIGIDITY →</div>
+                    </div>
+                    <p style="font-size:0.75rem; color:#777; margin-top:0.5rem; text-align:center;">
+                        Priority is driven by commitment + dependency rigidity, not request order.
+                    </p>
+                </div>
+
                 <!-- Commitment Matrix -->
                 <div style="margin:1rem 0; background:#f8f5f4; border-radius:12px; padding:1rem; border:1px solid #e8e0e4;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold',sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">📋 Commitment Matrix</h5>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.85rem;">
-                        <div style="background:#c6f6d5; padding:0.4rem 0.8rem; border-radius:6px; color:#22543d;"><strong>Project A</strong> (Tue 12 PM) — COMMITTED</div>
-                        <div style="background:#c6f6d5; padding:0.4rem 0.8rem; border-radius:6px; color:#22543d;"><strong>Project B</strong> (Wed 3 PM) — COMMITTED</div>
-                        <div style="background:#feebc8; padding:0.4rem 0.8rem; border-radius:6px; color:#744210;"><strong>Project C</strong> (Thu 5 PM) — CONDITIONAL</div>
-                        <div style="background:#feebc8; padding:0.4rem 0.8rem; border-radius:6px; color:#744210;"><strong>Project D</strong> (Fri 3 PM) — CONDITIONAL</div>
-                        <div style="background:#fed7d7; padding:0.4rem 0.8rem; border-radius:6px; color:#7b341e; grid-column:span 2;"><strong>Sable Ridge</strong> (Wed 5 PM) — CANNOT COMMIT</div>
+                    <h5 style="font-family:'Acherus Grotesque ExtraBold', sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">📋 Workstream Status</h5>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Workstream</th><th>Status</th><th>Why</th></tr></thead>
+                            <tbody>
+                                <tr><td>Project A</td><td><span class="status-badge committed">COMMITTED</span></td><td>Tuesday 12 PM</td></tr>
+                                <tr><td>Project B</td><td><span class="status-badge committed">COMMITTED</span></td><td>Wednesday 3 PM</td></tr>
+                                <tr><td>Project C</td><td><span class="status-badge conditional">CONDITIONAL</span></td><td>Source discrepancy requires verification</td></tr>
+                                <tr><td>Project D</td><td><span class="status-badge critical">CRITICAL DEPENDENCY</span></td><td>Wednesday 2–4 PM studio; reviewed script required</td></tr>
+                                <tr><td>Sable Ridge</td><td><span class="status-badge conditional">CONDITIONAL OFFER</span></td><td>Russian capacity not yet verified</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Hour-level Plan -->
-                <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapse(this)">
-                        ⏰ Hour-Level Plan — Monday
-                        <span class="arrow">▾</span>
+                <!-- Fact / Unknown / Decision -->
+                <div class="fud-grid">
+                    <div class="fud-card fact">
+                        <div class="fud-label">FACT</div>
+                        <div class="fud-content">Aristide has delivered approximately 60% of the Haitian Creole script.</div>
                     </div>
-                    <div class="collapsible-content">
-                        <table>
-                            <thead><tr><th>Time</th><th>Action</th></tr></thead>
-                            <tbody>
-                                <tr><td>9:00 AM</td><td>Message D. Aristide — studio is Wednesday; this is binding</td></tr>
-                                <tr><td>9:05 AM</td><td>Begin backup Haitian Creole sourcing (cannot wait)</td></tr>
-                                <tr><td>9:15 AM</td><td>Contact Russian translator re: Sable Ridge availability</td></tr>
-                                <tr><td>9:30 AM</td><td>Verify Project C source document conflict</td></tr>
-                                <tr><td>9:45 AM</td><td>Confirm Project A final check status</td></tr>
-                                <tr><td>10:00 AM</td><td>Check in with Project B translator</td></tr>
-                                <tr><td>10:30 AM</td><td>Escalation note to manager re: Sable Ridge</td></tr>
-                                <tr><td>11:00 AM</td><td>Decision point: Aristide responded? If not, activate backup</td></tr>
-                                <tr><td>EOD</td><td>Haitian Creole script path confirmed (Aristide or backup)</td></tr>
-                            </tbody>
-                        </table>
+                    <div class="fud-card unknown">
+                        <div class="fud-label">UNKNOWN</div>
+                        <div class="fud-content">Whether he can deliver the remaining 40% in time for review before Wednesday's studio session.</div>
+                    </div>
+                    <div class="fud-card decision">
+                        <div class="fud-label">DECISION</div>
+                        <div class="fud-content">Set a response trigger and activate backup sourcing if confirmation is not received.</div>
                     </div>
                 </div>
 
                 <!-- Backup Plan -->
                 <div class="collapsible">
-                    <div class="collapsible-header" onclick="toggleCollapse(this)">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case3-backup-content">
                         🔄 Backup Plan — Haitian Creole
                         <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case3-backup-content" role="region">
+                        <div style="display:flex; flex-direction:column; gap:0.3rem; font-size:0.85rem;">
+                            <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #2f855a;">
+                                <strong>PRIMARY</strong> — Aristide
+                            </div>
+                            <div style="text-align:center; color:#6d1e91; font-size:0.8rem;">↓ 11:30 AM response trigger</div>
+                            <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #cb8316;">
+                                <strong>BACKUP 1</strong> — Internal qualified Haitian Creole resource
+                            </div>
+                            <div style="text-align:center; color:#6d1e91; font-size:0.8rem;">↓</div>
+                            <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #cb8316;">
+                                <strong>BACKUP 2</strong> — Existing agency/vendor
+                            </div>
+                            <div style="text-align:center; color:#6d1e91; font-size:0.8rem;">↓</div>
+                            <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #c0392b;">
+                                <strong>ESCALATION</strong> — Studio decision / manager escalation
+                            </div>
+                            <div style="text-align:center; color:#6d1e91; font-size:0.8rem;">↓</div>
+                            <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #888;">
+                                <strong>LAST RESORT</strong> — Reschedule recording
+                            </div>
+                        </div>
+                        <p style="font-size:0.8rem; color:#777; margin-top:0.8rem;">
+                            <strong>Backup activation trigger:</strong> No confirmation from Aristide by 11:30 AM ET.
+                        </p>
                     </div>
-                    <div class="collapsible-content">
-                        <table>
-                            <thead><tr><th>Option</th><th>Action</th><th>Deadline</th></tr></thead>
-                            <tbody>
-                                <tr><td>1</td><td>D. Aristide responds and delivers by Tue 9:00</td><td>Mon 5:00 PM</td></tr>
-                                <tr><td>2</td><td>Contact 2–3 agencies by 9:30 AM</td><td>Mon 9:30 AM</td></tr>
-                                <tr><td>3</td><td>Check internal roster for other Haitian Creole translators</td><td>Mon 10:00 AM</td></tr>
-                                <tr><td>4</td><td>Escalate; assess repurposing studio session</td><td>Mon noon</td></tr>
-                                <tr><td>5</td><td>Adiar gravação (perda do valor)</td><td>Tue 9:00 AM</td></tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Hour-level Plan -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case3-hourly-content">
+                        ⏰ Hour-Level Plan — Monday
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case3-hourly-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead><tr><th>Time</th><th>Action</th></tr></thead>
+                                <tbody>
+                                    <tr><td>9:00 AM</td><td>Message D. Aristide — studio is Wednesday; this is binding</td></tr>
+                                    <tr><td>9:05 AM</td><td>Begin backup Haitian Creole sourcing (cannot wait)</td></tr>
+                                    <tr><td>9:15 AM</td><td>Contact Russian translator re: Sable Ridge availability</td></tr>
+                                    <tr><td>9:30 AM</td><td>Verify Project C source document conflict</td></tr>
+                                    <tr><td>9:45 AM</td><td>Confirm Project A final check status</td></tr>
+                                    <tr><td>10:00 AM</td><td>Check in with Project B translator</td></tr>
+                                    <tr><td>10:30 AM</td><td>Escalation note to manager re: Sable Ridge</td></tr>
+                                    <tr><td>11:00 AM</td><td>Decision point: Aristide responded? If not, activate backup</td></tr>
+                                    <tr><td>EOD</td><td>Haitian Creole script path confirmed (Aristide or backup)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Fact/Unknown/Decision for Project C -->
+                <div class="fud-grid" style="margin-top:1.5rem;">
+                    <div class="fud-card fact">
+                        <div class="fud-label">FACT</div>
+                        <div class="fud-content">Reviewer reports that the public website rate table differs from the supplied PDF.</div>
+                    </div>
+                    <div class="fud-card unknown">
+                        <div class="fud-label">UNKNOWN</div>
+                        <div class="fud-content">Whether the client changed the authoritative source.</div>
+                    </div>
+                    <div class="fud-card decision">
+                        <div class="fud-label">DECISION</div>
+                        <div class="fud-content">Verify the authoritative source before allowing review of the disputed content to continue.</div>
+                    </div>
+                </div>
+
+                <!-- Sable Ridge -->
+                <div style="margin:1rem 0; background:#f8f5f4; border-radius:12px; padding:1rem; border:1px solid #e8e0e4;">
+                    <h5 style="font-family:'Acherus Grotesque ExtraBold', sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.3rem;">📌 Prospect ≠ Commitment</h5>
+                    <p style="font-size:0.85rem; color:#4a4a4a; margin-bottom:0.5rem;">
+                        I will pursue the opportunity, but I will not promise Wednesday 5 PM delivery until Russian capacity and suitability are verified.
+                    </p>
+                    <ul style="font-size:0.8rem; color:#4a4a4a; list-style:none; padding:0;">
+                        <li style="margin-bottom:0.2rem;">1. Contact listed Russian resource.</li>
+                        <li style="margin-bottom:0.2rem;">2. Verify current availability.</li>
+                        <li style="margin-bottom:0.2rem;">3. Confirm fit for the language/content.</li>
+                        <li style="margin-bottom:0.2rem;">4. Confirm turnaround feasibility.</li>
+                        <li style="margin-bottom:0.2rem;">5. Only then offer a conditional commitment.</li>
+                    </ul>
                 </div>
 
                 <!-- Escalation -->
                 <div class="message-box" style="border-left-color:#cb8316;">
-                    <span class="msg-label">📤 Escalation to Manager (max 175 words)</span>
+                    <span class="msg-label">📤 Escalation to Manager</span>
                     <p style="font-size:0.85rem;">
-                        <em>"Sable Ridge: I want to take this, but flag the risks. Our only vetted Russian translator hasn't worked with us in 14 months. Options: 1) Accept as-is — risk if Russian unavailable. 2) Offer Spanish now, Russian by Friday — manages risk. 3) Decline this round. My recommendation is option 2, but you know this prospect. Separate: Project D translator silent since Thursday — activating backup sourcing now. What's your call?"</em>
+                        <em>"I can protect the four committed projects, but I cannot responsibly commit to Sable Ridge's Wednesday 5 PM delivery yet. Recommended path: protect A–D first; give Aristide a defined response trigger and activate backup sourcing if needed. Qualify Sable Ridge's Russian capacity in parallel, but keep the prospect commitment conditional. Trade-off: accepting Sable Ridge's deadline now could put existing client commitments at risk. If MAPA wants to pursue the prospect at all costs, I would need an explicit decision about which existing commitment can move."</em>
                     </p>
                 </div>
 
                 <!-- Message to Aristide -->
                 <div class="message-box" style="border-left-color:#cb8316;">
-                    <span class="msg-label">✉️ To D. Aristide (max 100 words)</span>
+                    <span class="msg-label">✉️ To D. Aristide</span>
                     <p style="font-size:0.85rem;">
                         <em>"I wanted to check in on the Haitian Creole script. You delivered 60% on Saturday — thank you. The recording session is booked Wednesday 2 PM and requires a final reviewed script. I need to hear from you today to confirm you can deliver the remaining 40% by Tuesday EOD."</em>
                     </p>
                 </div>
 
-                <!-- Risks -->
-                <div style="margin:1rem 0;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold',sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">⚠️ Key Risks</h5>
-                    <div class="risk-grid">
-                        <div class="risk-item"><span class="risk-label">🔴 Silent translator</span><span class="risk-action">Activate backup sourcing immediately</span></div>
-                        <div class="risk-item"><span class="risk-label">🔴 Non-refundable studio</span><span class="risk-action">Wednesday 2–4 PM — must have final script</span></div>
-                        <div class="risk-item"><span class="risk-label">🟡 Sable Ridge</span><span class="risk-action">Russian translator unconfirmed; present options to manager</span></div>
-                        <div class="risk-item"><span class="risk-label">🟠 Project C source conflict</span><span class="risk-action">Verify and resolve</span></div>
-                    </div>
-                </div>
-
-                <!-- AI Appendix -->
-                <div class="ai-appendix">
-                    <h5>🤖 AI Use Appendix — Case 3</h5>
-                    <div class="ai-grid">
-                        <div><strong>Tool:</strong> Claude (Anthropic)</div>
-                        <div><strong>Effort:</strong> 55% own / 45% AI</div>
-                        <div><strong>Useful:</strong> Structured Monday morning actions; drafted Aristide message</div>
-                        <div><strong>Correction 1:</strong> AI placed Project C source check as step 1 — I moved to step 4; studio booking is binding</div>
-                        <div><strong>Correction 2:</strong> AI escalation asked "what should I do?" — I rewrote; managers need options, not open questions</div>
-                        <div><strong>Human-owned decision:</strong> Recommending option 2 to manager (Spanish now, Russian Friday) — only path avoiding both unvetted risk and outright rejection</div>
-                    </div>
-                </div>
-
                 <!-- Must be true by Tuesday -->
                 <div style="margin-top:1rem; background:#ede4f0; border-radius:12px; padding:1rem; border-left:4px solid #6d1e91;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold',sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.2rem;">✅ Must be true by end of Tuesday</h5>
+                    <h5 style="font-family:'Acherus Grotesque ExtraBold', sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.2rem;">✅ Must be true by end of Tuesday</h5>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.3rem; font-size:0.85rem; color:#2d2d2d;">
                         <span>✓ Haitian Creole script 100% delivered and under review</span>
                         <span>✓ Project A delivered</span>
                         <span>✓ Project C source confirmed</span>
                         <span>✓ Russian translator confirmed or Sable Ridge re-scoped</span>
                         <span>✓ Project B in progress</span>
+                    </div>
+                </div>
+
+                <!-- Quality Controls -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case3-quality-content">
+                        ✅ Quality Controls (non-negotiable)
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case3-quality-content" role="region">
+                        <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0;">
+                            <li style="margin-bottom:0.3rem;">✅ Final reviewed script before studio</li>
+                            <li style="margin-bottom:0.3rem;">✅ Source confirmed before reviewer continues on C</li>
+                            <li style="margin-bottom:0.3rem;">✅ No unvetted Russian translator on Sable Ridge</li>
+                            <li style="margin-bottom:0.3rem;">✅ Internal check on A before delivery</li>
+                            <li style="margin-bottom:0.3rem;">✅ No commitment to Sable Ridge without Russian availability confirmed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- AI Appendix -->
+                <div class="ai-appendix" id="case-3-ai">
+                    <h5>🤖 AI Use Appendix — Case 3</h5>
+                    <div class="ai-grid">
+                        <div><strong>Tool:</strong> ChatGPT-4</div>
+                        <div><strong>Effort:</strong> 55% human / 45% AI</div>
+
+                        <div class="ai-full">
+                            <div class="ai-label">Prompt</div>
+                            <div class="ai-content" style="background:#fff; padding:0.5rem 0.8rem; border-radius:6px; font-size:0.85rem; color:#555;">
+                                "Three events happen Monday morning on top of 4 active projects. Help me build an hour-level plan that addresses the binding constraint first. Draft a message to a silent contractor. Max 100 words. Draft an escalation note presenting options on a new prospect. Max 175 words."
+                            </div>
+                        </div>
+
+                        <div class="ai-full">
+                            <div class="ai-label">Useful Output</div>
+                            <div class="ai-content">
+                                <ul style="list-style:none; padding:0; margin:0;">
+                                    <li>• Structured Monday morning actions</li>
+                                    <li>• Drafted Aristide message</li>
+                                    <li>• Helped sequence the backup plan</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 1</div>
+                            <div class="ai-content">AI placed Project C source check as step 1 — I moved it to step 4; studio booking is the binding constraint.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 2</div>
+                            <div class="ai-content">AI's escalation note asked "what should I do?" — I rewrote; managers need options, not open questions.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Correction 3</div>
+                            <div class="ai-content">AI told Aristide to "please prioritize this project." Removed — vague. Replaced with specific deadline and specific ask.</div>
+                        </div>
+
+                        <div class="ai-full ai-verified">
+                            <div class="ai-label">Verification</div>
+                            <div class="ai-content">Confirmed studio booking is non-refundable + next opening 12 days out — makes it the single most time-critical constraint. Confirmed Russian translator list has one name, 14 months inactive — reason not to commit to Sable Ridge. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
+                        </div>
+
+                        <div class="ai-full ai-human">
+                            <div class="ai-label">Human-Owned Judgment</div>
+                            <div class="ai-content">Recommending option 2 to manager (Spanish now, Russian Friday) — only path avoiding both unvetted risk and outright rejection.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1430,25 +2284,25 @@
     </section>
 
     <!-- ============================================================
-    FOOTER
+    FOOTER (assessment-oriented)
     ============================================================ -->
     <footer id="footer">
         <div class="footer-split">
             <div class="footer-left">
-                <a href="mailto:ariane.etimo@gmail.com">GET IN<br />TOUCH</a>
+                <p>Prepared for MAPA Translations<br />Ariane Lesnyak · Translation Project Coordinator Candidate</p>
             </div>
             <div class="footer-right">
                 <ul>
-                    <li><a href="#cases">Case Studies</a></li>
-                    <li><a href="#intro">Approach</a></li>
-                    <li><a href="https://alc-etimo.github.io/mapa/" target="_blank">Portfolio</a></li>
+                    <li><a href="#case-1">Case 01</a></li>
+                    <li><a href="#case-2">Case 02</a></li>
+                    <li><a href="#case-3">Case 03</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Ariane Lesnyak · Localization &amp; Language Operations · São Paulo, Brazil</p>
-            <p class="small">Designed for MAPA Translations · Built with precision, empathy and purpose.</p>
-            <p class="tiny">© 2026 Ariane Lesnyak · All rights reserved</p>
+            <p>Case Study Assessment · MAPA Translations</p>
+            <p class="small">Ariane Lesnyak · Translation Project Coordinator Candidate</p>
+            <p class="tiny">© 2026 · All rights reserved</p>
         </div>
     </footer>
 
@@ -1456,99 +2310,215 @@
     JAVASCRIPT
     ============================================================ -->
     <script>
-        // ============================================================
-        // MENU TOGGLE
-        // ============================================================
-        const menuToggle = document.getElementById('menuToggle');
-        const hamburgerToggle = document.getElementById('hamburgerToggle');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const menuBox = document.getElementById('menuBox');
-        const menuClose = document.getElementById('menuClose');
+        (function() {
+            'use strict';
 
-        function openMenu() {
-            menuOverlay.classList.add('active');
-            menuBox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            // ============================================================
+            // MENU TOGGLE
+            // ============================================================
+            const menuToggle = document.getElementById('menuToggle');
+            const hamburgerToggle = document.getElementById('hamburgerToggle');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuBox = document.getElementById('menuBox');
+            const menuClose = document.getElementById('menuClose');
 
-        function closeMenu() {
-            menuOverlay.classList.remove('active');
-            menuBox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            function openMenu() {
+                menuOverlay.classList.add('active');
+                menuBox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
 
-        menuToggle.addEventListener('click', openMenu);
-        hamburgerToggle.addEventListener('click', openMenu);
-        menuClose.addEventListener('click', closeMenu);
-        menuOverlay.addEventListener('click', closeMenu);
-        document.querySelectorAll('.menu-box a').forEach(l => l.addEventListener('click', closeMenu));
+            function closeMenu() {
+                menuOverlay.classList.remove('active');
+                menuBox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
 
-        // ============================================================
-        // SCROLL REVEAL
-        // ============================================================
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+            menuToggle.addEventListener('click', openMenu);
+            hamburgerToggle.addEventListener('click', openMenu);
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            document.querySelectorAll('.menu-box a').forEach(function(l) {
+                l.addEventListener('click', closeMenu);
             });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
 
-        // ============================================================
-        // HERO BUTTON -> CASES
-        // ============================================================
-        document.querySelector('.btn-hero')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#cases')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+            // ============================================================
+            // SCROLL REVEAL
+            // ============================================================
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+                revealObserver.observe(el);
+            });
 
-        // ============================================================
-        // COLLAPSIBLE TOGGLE
-        // ============================================================
-        function toggleCollapse(header) {
-            const content = header.nextElementSibling;
-            const isOpen = content.classList.contains('open');
+            // ============================================================
+            // HERO BUTTON -> INTRO
+            // ============================================================
+            document.querySelector('.btn-hero')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('#intro')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
 
-            // Close all other collapsibles in the same case item
-            const parent = header.closest('.case-item');
-            if (parent) {
-                parent.querySelectorAll('.collapsible-content').forEach(c => {
-                    if (c !== content) {
-                        c.classList.remove('open');
-                        c.previousElementSibling.classList.remove('active');
+            // ============================================================
+            // COLLAPSIBLE TOGGLE (dynamic max-height)
+            // ============================================================
+            function toggleCollapse(header) {
+                const content = header.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+
+                // Close all other collapsibles in the same case item
+                const parent = header.closest('.case-item');
+                if (parent) {
+                    parent.querySelectorAll('.collapsible-content').forEach(function(c) {
+                        if (c !== content) {
+                            c.classList.remove('open');
+                            c.style.maxHeight = '0px';
+                            c.previousElementSibling.classList.remove('active');
+                            c.previousElementSibling.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
+
+                if (isOpen) {
+                    content.classList.remove('open');
+                    content.style.maxHeight = '0px';
+                    header.classList.remove('active');
+                    header.setAttribute('aria-expanded', 'false');
+                } else {
+                    content.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    header.classList.add('active');
+                    header.setAttribute('aria-expanded', 'true');
+                    // Smooth scroll to show the content
+                    setTimeout(function() {
+                        header.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            }
+
+            document.querySelectorAll('.collapsible-header').forEach(function(header) {
+                header.addEventListener('click', function(e) {
+                    toggleCollapse(this);
+                });
+                header.setAttribute('tabindex', '0');
+                header.setAttribute('role', 'button');
+                header.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCollapse(this);
                     }
                 });
-            }
+            });
 
-            if (isOpen) {
-                content.classList.remove('open');
-                header.classList.remove('active');
-            } else {
-                content.classList.add('open');
-                header.classList.add('active');
-                // Smooth scroll to show the content
-                setTimeout(() => {
-                    header.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
-            }
-        }
+            // ============================================================
+            // RECALCULATE ACCORDION HEIGHT ON RESIZE
+            // ============================================================
+            window.addEventListener('resize', function() {
+                document.querySelectorAll('.collapsible-content.open').forEach(function(content) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                });
+            });
 
-        // ============================================================
-        // KEYBOARD ACCESSIBILITY FOR COLLAPSIBLES
-        // ============================================================
-        document.querySelectorAll('.collapsible-header').forEach(header => {
-            header.setAttribute('tabindex', '0');
-            header.setAttribute('role', 'button');
-            header.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
+            // ============================================================
+            // KEYBOARD NAVIGATION
+            // ============================================================
+            document.addEventListener('keydown', function(e) {
+                // Don't intercept if typing in input, textarea, or contenteditable
+                var tag = e.target.tagName.toLowerCase();
+                if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) {
+                    return;
+                }
+
+                // ESC: close menu or active accordion
+                if (e.key === 'Escape') {
+                    if (menuBox.classList.contains('active')) {
+                        closeMenu();
+                    }
+                    // Close any open accordion
+                    var openAccordion = document.querySelector('.collapsible-content.open');
+                    if (openAccordion) {
+                        var header = openAccordion.previousElementSibling;
+                        if (header && header.classList.contains('collapsible-header')) {
+                            toggleCollapse(header);
+                        }
+                    }
+                    return;
+                }
+
+                // 1, 2, 3: scroll to cases
+                if (e.key === '1') {
                     e.preventDefault();
-                    toggleCollapse(this);
+                    document.querySelector('#case-1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else if (e.key === '2') {
+                    e.preventDefault();
+                    document.querySelector('#case-2')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else if (e.key === '3') {
+                    e.preventDefault();
+                    document.querySelector('#case-3')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+                // ArrowRight: next case
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    var currentCase = document.querySelector('.case-item:target');
+                    if (currentCase) {
+                        var next = currentCase.nextElementSibling;
+                        if (next && next.classList.contains('case-item')) {
+                            next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    } else {
+                        document.querySelector('#case-1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+
+                // ArrowLeft: previous case
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    var currentCase = document.querySelector('.case-item:target');
+                    if (currentCase) {
+                        var prev = currentCase.previousElementSibling;
+                        if (prev && prev.classList.contains('case-item')) {
+                            prev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
                 }
             });
-        });
 
-        console.log('✅ MAPA Case Studies page ready.');
-        console.log('📌 Cases: 01 Intake & Scope · 02 Version Control · 03 Capacity');
-        console.log('🎯 Designed for Ariane Lesnyak · MAPA Translations interview');
+            // ============================================================
+            // PRESENTATION MODE
+            // ============================================================
+            var presentationToggle = document.getElementById('presentationToggle');
+            presentationToggle.addEventListener('click', function() {
+                document.body.classList.toggle('presentation-mode');
+                this.textContent = document.body.classList.contains('presentation-mode') ? 'EXIT' : 'PRESENT';
+            });
+
+            // ============================================================
+            // DEEP LINKS — scroll to case on load
+            // ============================================================
+            window.addEventListener('load', function() {
+                var hash = window.location.hash;
+                if (hash) {
+                    var target = document.querySelector(hash);
+                    if (target) {
+                        setTimeout(function() {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 300);
+                    }
+                }
+            });
+
+            // ============================================================
+            // LOG
+            // ============================================================
+            console.log('✅ MAPA Case Studies page ready.');
+            console.log('📌 Cases: 01 Intake & Scope · 02 Version Control · 03 Capacity');
+            console.log('🎯 Designed for Ariane Lesnyak · MAPA Translations interview');
+
+        })();
     </script>
 
 </body>
