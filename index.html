@@ -227,25 +227,6 @@
             opacity: .85;
         }
 
-        .presentation-toggle {
-            background: transparent;
-            border: 1px solid #cb8316;
-            border-radius: 30px;
-            padding: 0.2rem 1rem;
-            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #cb8316;
-            cursor: pointer;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .presentation-toggle:hover {
-            background: #cb8316;
-            color: #ffffff;
-        }
-
         /* Menu overlay */
         .menu-overlay {
             position: fixed;
@@ -572,6 +553,7 @@
         .decision-logic {
             background: #f8f5f4;
             border-color: #cb8316 !important;
+            margin-bottom: 1.5rem; /* added spacing after decision logic */
         }
 
         .decision-logic .case-box-label {
@@ -677,10 +659,8 @@
         }
 
         .collapsible-content.open {
-            max-height: 0;
-            /* set dynamically via JS */
-            padding: 1rem 1.5rem 2rem;
-            /* increased bottom padding */
+            max-height: 0; /* set dynamically via JS */
+            padding: 1rem 1.5rem 2.2rem; /* increased bottom padding for last items */
         }
 
         .collapsible-content table {
@@ -818,6 +798,18 @@
             line-height: 1.6;
         }
 
+        /* Email side-by-side */
+        .email-side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .email-side-by-side .email-block {
+            margin: 0;
+        }
+
         /* AI Appendix */
         .ai-appendix {
             background: #f8f5f4;
@@ -931,48 +923,51 @@
             margin-top: 0.2rem;
         }
 
-        /* Fact / Unknown / Decision */
-        .fud-grid {
+        /* Fact / Unknown / Decision — improved layout */
+        .fud-grid-alternate {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin: 1rem 0 1.5rem;
         }
 
-        .fud-card {
+        .fud-card-alt {
             border: 1px solid #e8e0e4;
             border-radius: 12px;
-            padding: 1rem;
-            background: #fff;
+            padding: 1.2rem;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
         }
 
-        .fud-card.fact {
+        .fud-card-alt.fact {
             border-top: 4px solid #2f855a;
         }
 
-        .fud-card.unknown {
+        .fud-card-alt.unknown {
             border-top: 4px solid #cb8316;
         }
 
-        .fud-card.decision {
+        .fud-card-alt.decision {
             border-top: 4px solid #6d1e91;
         }
 
-        .fud-label {
+        .fud-label-alt {
             font-family: 'Acherus Grotesque ExtraBold', sans-serif;
             font-size: 0.65rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: #6d1e91;
+            margin-bottom: 0.3rem;
         }
 
-        .fud-content {
+        .fud-content-alt {
             font-size: 0.9rem;
             color: #4a4a4a;
-            margin-top: 0.3rem;
+            line-height: 1.5;
         }
 
-        /* Scope flow */
+        /* Scope flow — with right arrow */
         .scope-flow {
             display: flex;
             align-items: center;
@@ -1001,6 +996,8 @@
         .scope-flow .arrow {
             color: #6d1e91;
             font-size: 1.2rem;
+            font-weight: 700;
+            transform: rotate(0deg);
         }
 
         /* Commitment Position */
@@ -1056,6 +1053,15 @@
             color: #4a4a4a;
             margin: 0;
             max-width: 100%;
+        }
+
+        .commitment-manager-line {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6d1e91;
+            border-top: 1px dashed #e8e0e4;
+            padding-top: 0.5rem;
         }
 
         /* Dependency timeline */
@@ -1155,7 +1161,7 @@
             font-size: 1rem;
         }
 
-        /* Priority matrix */
+        /* Priority matrix — redesigned */
         .priority-matrix {
             background: #f8f5f4;
             border-radius: 12px;
@@ -1164,21 +1170,19 @@
             margin: 1.5rem 0;
         }
 
-        .matrix-y {
-            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #6d1e91;
-            text-align: center;
-            margin-bottom: 0.3rem;
+        .matrix-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.5rem;
-            align-items: center;
+        .matrix-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 0.3rem 0;
+            width: 100%;
+            flex-wrap: wrap;
         }
 
         .matrix-label {
@@ -1187,21 +1191,20 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #6d1e91;
-        }
-
-        .matrix-label.top {
+            width: 100%;
             text-align: center;
         }
 
-        .matrix-cell {
+        .matrix-box {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem;
+            gap: 0.5rem;
             justify-content: center;
-            padding: 0.5rem;
+            padding: 0.3rem 0.8rem;
             background: #ffffff;
             border-radius: 8px;
             border: 1px solid #e8e0e4;
+            min-width: 120px;
         }
 
         .matrix-item {
@@ -1243,15 +1246,11 @@
             opacity: 0.7;
         }
 
-        .matrix-x {
-            grid-column: span 3;
-            text-align: center;
-            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #6d1e91;
+        .matrix-legend {
             margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #777;
+            text-align: center;
         }
 
         /* Vietnamese workflow card */
@@ -1309,6 +1308,45 @@
             color: #4a4a4a;
             margin: 0;
             max-width: 100%;
+        }
+
+        /* Workstream Status — improve spacing */
+        .workstream-status {
+            margin: 1rem 0;
+            background: #f8f5f4;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid #e8e0e4;
+        }
+
+        .workstream-status table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .workstream-status table th,
+        .workstream-status table td {
+            padding: 0.6rem 1rem;
+            text-align: center;
+        }
+
+        .workstream-status table th {
+            background: #6d1e91;
+            color: #ffffff;
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .workstream-status table td {
+            border-bottom: 1px solid #e8e0e4;
+            color: #4a4a4a;
+        }
+
+        .workstream-status table tr:last-child td {
+            border-bottom: none;
         }
 
         /* ============================================================
@@ -1398,35 +1436,12 @@
         }
 
         /* ============================================================
-        PRESENTATION MODE
-        ============================================================ */
-        .presentation-mode .navbar {
-            position: fixed;
-            opacity: 0.15;
-            transition: opacity .2s;
-        }
-
-        .presentation-mode .navbar:hover {
-            opacity: 1;
-        }
-
-        .presentation-mode .footer-split,
-        .presentation-mode .footer-bottom {
-            display: none;
-        }
-
-        .presentation-mode .case-item {
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
-        }
-
-        /* ============================================================
         PRINT / PDF MODE
         ============================================================ */
         @media print {
             .navbar,
             .navbar-hamburger,
             .footer-split,
-            .presentation-toggle,
             .menu-overlay,
             .menu-box {
                 display: none !important;
@@ -1466,6 +1481,13 @@
                 max-width: 100%;
                 padding: 0 1rem;
             }
+
+            .email-side-by-side {
+                display: block;
+            }
+            .email-side-by-side .email-block {
+                margin-bottom: 1rem;
+            }
         }
 
         /* ============================================================
@@ -1488,7 +1510,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .fud-grid {
+            .fud-grid-alternate {
                 grid-template-columns: 1fr 1fr;
             }
 
@@ -1507,6 +1529,11 @@
 
             .workflow-card .wf-row {
                 grid-template-columns: 1fr;
+            }
+
+            .email-side-by-side {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
         }
 
@@ -1574,7 +1601,7 @@
                 font-size: 0.85rem;
             }
 
-            .fud-grid {
+            .fud-grid-alternate {
                 grid-template-columns: 1fr;
             }
 
@@ -1600,17 +1627,20 @@
                 grid-template-columns: 1fr;
             }
 
-            .matrix-grid {
-                grid-template-columns: 1fr;
+            .matrix-row {
+                flex-direction: column;
+                align-items: center;
                 gap: 0.5rem;
             }
 
-            .matrix-x {
-                grid-column: span 1;
+            .workstream-status table th,
+            .workstream-status table td {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
             }
 
-            .matrix-label.top {
-                text-align: center;
+            .email-side-by-side {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1695,6 +1725,12 @@
             .email-block .email-body {
                 font-size: 0.85rem;
             }
+
+            .workstream-status table th,
+            .workstream-status table td {
+                padding: 0.3rem 0.4rem;
+                font-size: 0.7rem;
+            }
         }
 
         /* Focus styles for accessibility */
@@ -1707,19 +1743,21 @@
         /* ============================================================
         CASE-SPECIFIC OVERRIDES
         ============================================================ */
-        /* Ensure Vietnamese workflow card is visible */
         .vietnamese-workflow {
             margin-top: 1rem;
         }
 
-        /* No-response fallback spacing */
         .no-response-box {
             margin-top: 1rem;
         }
 
-        /* Commitment position spacing */
         .commitment-position {
             margin-top: 1rem;
+        }
+
+        /* Additional spacing for decision logic */
+        .decision-logic {
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -1734,7 +1772,6 @@
                 <img src="https://github.com/alc-etimo/mapa/blob/main/logo.png?raw=true" alt="Ariane Lesnyak" />
             </div>
             <div class="navbar-right">
-                <button class="presentation-toggle" id="presentationToggle">PRESENT</button>
                 <span class="navbar-sections" id="menuToggle">SECTIONS</span>
                 <div class="navbar-hamburger" id="hamburgerToggle">
                     <span></span><span></span><span></span>
@@ -1920,13 +1957,13 @@
                 <!-- Scope Flow -->
                 <div class="scope-flow">
                     <div>FILES RECEIVED</div>
-                    <span class="arrow">↓</span>
+                    <span class="arrow">→</span>
                     <div>SOURCE VALIDATION</div>
-                    <span class="arrow">↓</span>
+                    <span class="arrow">→</span>
                     <div>SCOPE CONFIRMATION</div>
-                    <span class="arrow">↓</span>
+                    <span class="arrow">→</span>
                     <div>RESOURCE CHECK</div>
-                    <span class="arrow">↓</span>
+                    <span class="arrow">→</span>
                     <div class="scope-final">QUOTE</div>
                 </div>
 
@@ -1979,7 +2016,7 @@
                             <li>I received a document labeled "Board Roster — CONFIDENTIAL" that wasn't mentioned in your email. Was this intentional?</li>
                         </ol>
                         <p style="margin-bottom:0.5rem;">On Vietnamese: I'd recommend a brief conversation before quoting that approach — there are quality and liability considerations I'd like to walk you through.</p>
-                        <p>Once I have these confirmations, I can turn the quote around promptly.</p>
+                        <p>Once I have those confirmations, I can turn the quote around promptly.</p>
                         <p style="margin-top:0.5rem;">Best regards,<br />Ariane Lesnyak</p>
                     </div>
                 </div>
@@ -2161,29 +2198,31 @@
                     <p>At the go/no-go checkpoint, separate changes that are safe and ready to proceed from changes that still require client authority. Document unresolved items and escalate the schedule/print trade-off. Do not silently implement contradictory or unconfirmed safety changes just to preserve the deadline.</p>
                 </div>
 
-                <!-- Messages -->
-                <div class="email-block" style="border-left-color:#cb8316;">
-                    <div class="email-to"><strong>TO:</strong> Grant Whitcomb</div>
-                    <div class="email-subject"><strong>SUBJECT:</strong> Brazilian Portuguese Review — Action Needed Before 2:00 PM Today</div>
-                    <div class="email-body">
-                        <p style="margin-bottom:0.5rem;">Hi Grant,</p>
-                        <p style="margin-bottom:0.5rem;">Thank you for forwarding Camila's feedback and the legal update. Two things need your written confirmation before I can proceed:</p>
-                        <p style="margin-bottom:0.5rem;"><strong>Safety warning:</strong> One of Camila's comments softens the open-flame warning. Per our process, any safety statement change requires written client confirmation before print. Please confirm: keep approved wording or adopt the change?</p>
-                        <p style="margin-bottom:0.5rem;"><strong>Legal line:</strong> The approved English source reads "36 months." Implementing "3 years" in translations while the English master is already in Northline's queue creates a version conflict. I need written confirmation and clarity on whether the English insert will also be updated.</p>
-                        <p>I'm implementing the six clear errors now. I need your response by 2:00 PM ET today to make the Thursday deadline.</p>
-                        <p style="margin-top:0.5rem;">Thanks,<br />Ariane</p>
+                <!-- Messages side by side -->
+                <div class="email-side-by-side">
+                    <div class="email-block" style="border-left-color:#cb8316;">
+                        <div class="email-to"><strong>TO:</strong> Grant Whitcomb</div>
+                        <div class="email-subject"><strong>SUBJECT:</strong> Brazilian Portuguese Review — Action Needed Before 2:00 PM Today</div>
+                        <div class="email-body">
+                            <p style="margin-bottom:0.5rem;">Hi Grant,</p>
+                            <p style="margin-bottom:0.5rem;">Thank you for forwarding Camila's feedback and the legal update. Two things need your written confirmation before I can proceed:</p>
+                            <p style="margin-bottom:0.5rem;"><strong>Safety warning:</strong> One of Camila's comments softens the open-flame warning. Per our process, any safety statement change requires written client confirmation before print. Please confirm: keep approved wording or adopt the change?</p>
+                            <p style="margin-bottom:0.5rem;"><strong>Legal line:</strong> The approved English source reads "36 months." Implementing "3 years" in translations while the English master is already in Northline's queue creates a version conflict. I need written confirmation and clarity on whether the English insert will also be updated.</p>
+                            <p>I'm implementing the six clear errors now. I need your response by 2:00 PM ET today to make the Thursday deadline.</p>
+                            <p style="margin-top:0.5rem;">Thanks,<br />Ariane</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="email-block" style="border-left-color:#6d1e91;">
-                    <div class="email-to"><strong>TO:</strong> Pavel R.</div>
-                    <div class="email-subject"><strong>SUBJECT:</strong> Brazilian Portuguese — Changes Coming in Two Waves</div>
-                    <div class="email-body">
-                        <p style="margin-bottom:0.5rem;">Hi Pavel,</p>
-                        <p style="margin-bottom:0.5rem;">I have six hours of your Wednesday capacity to work with. Can you confirm your available window and whether you can accommodate a first batch of confirmed corrections followed by a second batch after the client decision point?</p>
-                        <p style="margin-bottom:0.5rem;">The first batch is six corrections — clear errors, no approvals needed. I'm working through the remaining feedback with the client and expect a second batch by 2:00 PM.</p>
-                        <p>Also, please be aware of the Chinese reflow risk: pages 7–12 may shift depending on text changes.</p>
-                        <p style="margin-top:0.5rem;">Thanks,<br />Ariane</p>
+                    <div class="email-block" style="border-left-color:#6d1e91;">
+                        <div class="email-to"><strong>TO:</strong> Pavel R.</div>
+                        <div class="email-subject"><strong>SUBJECT:</strong> Brazilian Portuguese — Changes Coming in Two Waves</div>
+                        <div class="email-body">
+                            <p style="margin-bottom:0.5rem;">Hi Pavel,</p>
+                            <p style="margin-bottom:0.5rem;">I have six hours of your Wednesday capacity to work with. Can you confirm your available window and whether you can accommodate a first batch of confirmed corrections followed by a second batch after the client decision point?</p>
+                            <p style="margin-bottom:0.5rem;">The first batch is six corrections — clear errors, no approvals needed. I'm working through the remaining feedback with the client and expect a second batch by 2:00 PM.</p>
+                            <p>Also, please be aware of the Chinese reflow risk: pages 7–12 may shift depending on text changes.</p>
+                            <p style="margin-top:0.5rem;">Thanks,<br />Ariane</p>
+                        </div>
                     </div>
                 </div>
 
@@ -2299,29 +2338,40 @@
                     </div>
                 </div>
 
-                <!-- Priority Matrix -->
+                <!-- Priority Matrix — redesigned -->
                 <div class="priority-matrix">
-                    <div class="matrix-y">CONSEQUENCE OF FAILURE</div>
-                    <div class="matrix-grid">
-                        <div class="matrix-label top">HIGH</div>
-                        <div class="matrix-cell">
-                            <span class="matrix-item d">D</span>
-                            <span class="matrix-item a">A</span>
+                    <div class="matrix-container">
+                        <div class="matrix-label" style="margin-bottom:0.3rem;">CONSEQUENCE OF FAILURE</div>
+                        <div class="matrix-row">
+                            <div class="matrix-box">
+                                <span class="matrix-item d">D</span>
+                                <span class="matrix-item a">A</span>
+                            </div>
+                            <div style="font-size:0.9rem; color:#6d1e91; align-self:center;">HIGH</div>
                         </div>
-                        <div class="matrix-cell">
-                            <span class="matrix-item b">B</span>
-                            <span class="matrix-item c">C</span>
+                        <div class="matrix-row">
+                            <div class="matrix-box">
+                                <span class="matrix-item b">B</span>
+                                <span class="matrix-item c">C</span>
+                            </div>
+                            <div style="font-size:0.9rem; color:#6d1e91; align-self:center;">MEDIUM</div>
                         </div>
-                        <div class="matrix-x">DEADLINE / DEPENDENCY RIGIDITY →</div>
+                        <div class="matrix-row">
+                            <div class="matrix-box">
+                                <span class="matrix-item uncommitted">Sable Ridge</span>
+                            </div>
+                            <div style="font-size:0.9rem; color:#6d1e91; align-self:center;">LOW (opportunity)</div>
+                        </div>
+                        <div class="matrix-legend">
+                            <span style="font-weight:bold;">→ DEADLINE / DEPENDENCY RIGIDITY</span><br />
+                            <span style="font-size:0.7rem;">Priority is driven by commitment + dependency rigidity, not request order.</span>
+                        </div>
                     </div>
-                    <p style="font-size:0.75rem; color:#777; margin-top:0.5rem; text-align:center;">
-                        Priority is driven by commitment + dependency rigidity, not request order.
-                    </p>
                 </div>
 
                 <!-- Workstream Status -->
-                <div style="margin:1rem 0; background:#f8f5f4; border-radius:12px; padding:1rem; border:1px solid #e8e0e4;">
-                    <h5 style="font-family:'Acherus Grotesque ExtraBold', sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">📋 Workstream Status</h5>
+                <div class="workstream-status">
+                    <h5 style="font-family:'Acherus Grotesque ExtraBold', sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem; text-align:center;">📋 Workstream Status</h5>
                     <div class="table-scroll">
                         <table>
                             <thead><tr><th>Workstream</th><th>Status</th><th>Why</th></tr></thead>
@@ -2349,22 +2399,25 @@
                     <div class="commitment-col conditional">
                         <span class="commitment-label">CONDITIONAL</span>
                         <p>Sable Ridge becomes commit-able only if Russian capacity, suitability and turnaround are verified without displacing an existing commitment.</p>
+                        <div class="commitment-manager-line">
+                            <strong>Manager decision required:</strong> Whether to pursue Sable Ridge at the requested Wednesday 5:00 PM deadline despite unverified Russian capacity.
+                        </div>
                     </div>
                 </div>
 
-                <!-- Fact / Unknown / Decision — Aristide -->
-                <div class="fud-grid">
-                    <div class="fud-card fact">
-                        <div class="fud-label">FACT</div>
-                        <div class="fud-content">Aristide delivered 60% Saturday and has not answered three emails since Thursday.</div>
+                <!-- Fact / Unknown / Decision — Aristide (alternate layout) -->
+                <div class="fud-grid-alternate">
+                    <div class="fud-card-alt fact">
+                        <div class="fud-label-alt">FACT</div>
+                        <div class="fud-content-alt">Aristide delivered 60% Saturday and has not answered three emails since Thursday.</div>
                     </div>
-                    <div class="fud-card unknown">
-                        <div class="fud-label">UNKNOWN</div>
-                        <div class="fud-content">Whether he can deliver the remaining script in time for review before Wednesday 2 PM.</div>
+                    <div class="fud-card-alt unknown">
+                        <div class="fud-label-alt">UNKNOWN</div>
+                        <div class="fud-content-alt">Whether he can deliver the remaining script in time for review before Wednesday 2 PM.</div>
                     </div>
-                    <div class="fud-card decision">
-                        <div class="fud-label">DECISION</div>
-                        <div class="fud-content">Set an 11:30 AM response trigger and activate backup sourcing if there is no confirmation.</div>
+                    <div class="fud-card-alt decision">
+                        <div class="fud-label-alt">DECISION</div>
+                        <div class="fud-content-alt">Set an 11:30 AM response trigger and activate backup sourcing if there is no confirmation.</div>
                     </div>
                 </div>
 
@@ -2405,19 +2458,19 @@
                     </div>
                 </div>
 
-                <!-- Fact / Unknown / Decision — Project C -->
-                <div class="fud-grid" style="margin-top:1.5rem;">
-                    <div class="fud-card fact">
-                        <div class="fud-label">FACT</div>
-                        <div class="fud-content">The reviewer reports a discrepancy between the public website rate table and the supplied PDF.</div>
+                <!-- Fact / Unknown / Decision — Project C (alternate) -->
+                <div class="fud-grid-alternate" style="margin-top:1.5rem;">
+                    <div class="fud-card-alt fact">
+                        <div class="fud-label-alt">FACT</div>
+                        <div class="fud-content-alt">The reviewer reports a discrepancy between the public website rate table and the supplied PDF.</div>
                     </div>
-                    <div class="fud-card unknown">
-                        <div class="fud-label">UNKNOWN</div>
-                        <div class="fud-content">Whether the client changed the authoritative source.</div>
+                    <div class="fud-card-alt unknown">
+                        <div class="fud-label-alt">UNKNOWN</div>
+                        <div class="fud-content-alt">Whether the client changed the authoritative source.</div>
                     </div>
-                    <div class="fud-card decision">
-                        <div class="fud-label">DECISION</div>
-                        <div class="fud-content">Verify the authoritative source before continuing review of the disputed content.</div>
+                    <div class="fud-card-alt decision">
+                        <div class="fud-label-alt">DECISION</div>
+                        <div class="fud-content-alt">Verify the authoritative source before continuing review of the disputed content.</div>
                     </div>
                 </div>
 
@@ -2492,10 +2545,17 @@
                     <div class="email-to"><strong>TO:</strong> Manager</div>
                     <div class="email-subject"><strong>SUBJECT:</strong> Capacity assessment — new prospect and Project D risk</div>
                     <div class="email-body">
-                        <p style="margin-bottom:0.5rem;">I can protect the four committed projects, but I cannot responsibly commit to Sable Ridge's Wednesday 5 PM delivery yet.</p>
-                        <p style="margin-bottom:0.5rem;"><strong>Recommended path:</strong> protect A–D first; give Aristide a defined response trigger and activate backup sourcing if needed. Qualify Sable Ridge's Russian capacity in parallel, but keep the prospect commitment conditional.</p>
-                        <p style="margin-bottom:0.5rem;"><strong>Trade-off:</strong> accepting Sable Ridge's deadline now could put existing client commitments at risk. If MAPA wants to pursue the prospect at all costs, I would need an explicit decision about which existing commitment can move.</p>
-                        <p style="margin-top:0.5rem;">What's your call?</p>
+                        <p style="margin-bottom:0.5rem;">I’ve reviewed the current capacity across A–D and the Sable Ridge request.</p>
+
+                        <p style="margin-bottom:0.5rem;"><strong>My recommendation is Option A:</strong> protect the four existing commitments, manage Project D’s studio dependency with the 11:30 AM Aristide trigger and backup sourcing, and qualify Sable Ridge’s Russian capacity in parallel. I would keep the Wednesday 5:00 PM prospect commitment conditional until that capacity is verified.</p>
+
+                        <p style="margin-bottom:0.5rem;"><strong>Option B:</strong> pursue Sable Ridge at the requested deadline, but only with an explicit decision to reallocate capacity if doing so puts an existing commitment at risk.</p>
+
+                        <p style="margin-bottom:0.5rem;"><strong>Option C:</strong> protect A–D without exception and tell Sable Ridge that Wednesday 5:00 PM is not currently feasible, while offering an alternative timeline once capacity is confirmed.</p>
+
+                        <p style="margin-bottom:0.5rem;"><strong>The trade-off is straightforward:</strong> A protects existing client commitments while keeping the prospect alive; B maximizes the commercial opportunity but increases delivery risk; C minimizes operational risk but may reduce the chance of winning the account.</p>
+
+                        <p style="margin-top:0.5rem;"><strong>I recommend A.</strong></p>
                     </div>
                 </div>
 
@@ -2696,31 +2756,6 @@
             document.querySelector('.btn-hero')?.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector('#intro')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-
-            // ============================================================
-            // PRESENTATION MODE
-            // ============================================================
-            const presentationToggle = document.getElementById('presentationToggle');
-            let presentationModeActive = false;
-
-            presentationToggle.addEventListener('click', function() {
-                presentationModeActive = !presentationModeActive;
-                document.body.classList.toggle('presentation-mode');
-                this.textContent = presentationModeActive ? 'EXIT' : 'PRESENT';
-            });
-
-            // Keyboard shortcut: P for presentation mode
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'p' || e.key === 'P') {
-                    // Don't intercept if typing in input, textarea, or contenteditable
-                    var tag = e.target.tagName.toLowerCase();
-                    if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) {
-                        return;
-                    }
-                    e.preventDefault();
-                    presentationToggle.click();
-                }
             });
 
             // ============================================================
