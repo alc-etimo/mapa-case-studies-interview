@@ -6,14 +6,13 @@
     <title>MAPA Case Studies · Ariane Lesnyak</title>
     <meta name="description" content="Case study assessment for Translation Project Coordinator at MAPA Translations." />
 
-    <!-- Google Fonts (fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
     <style>
         /* ============================================================
-        CUSTOM FONTS (local fallback)
+        CUSTOM FONTS
         ============================================================ */
         @font-face {
             font-family: 'Fiona Regular';
@@ -569,6 +568,16 @@
             letter-spacing: 0.3px;
         }
 
+        /* Decision Logic */
+        .decision-logic {
+            background: #f8f5f4;
+            border-color: #cb8316 !important;
+        }
+
+        .decision-logic .case-box-label {
+            color: #cb8316 !important;
+        }
+
         /* Case grid 2 columns */
         .case-grid-2 {
             display: grid;
@@ -589,7 +598,7 @@
             border-color: #6d1e91;
         }
 
-        .case-box .box-label {
+        .case-box .case-box-label {
             font-family: 'Acherus Grotesque ExtraBold', sans-serif;
             font-size: 0.65rem;
             letter-spacing: 2px;
@@ -670,7 +679,8 @@
         .collapsible-content.open {
             max-height: 0;
             /* set dynamically via JS */
-            padding: 1rem 1.5rem 1.5rem;
+            padding: 1rem 1.5rem 2rem;
+            /* increased bottom padding */
         }
 
         .collapsible-content table {
@@ -779,6 +789,35 @@
             margin: 0;
         }
 
+        /* Email style */
+        .email-block {
+            background: #ede4f0;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid #6d1e91;
+            margin: 1rem 0;
+            font-family: 'Acherus Grotesque Light', sans-serif;
+        }
+
+        .email-block .email-to {
+            font-size: 0.8rem;
+            color: #4a4a4a;
+            margin-bottom: 0.2rem;
+        }
+
+        .email-block .email-subject {
+            font-size: 0.8rem;
+            color: #4a4a4a;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .email-block .email-body {
+            font-size: 0.95rem;
+            color: #2d2d2d;
+            line-height: 1.6;
+        }
+
         /* AI Appendix */
         .ai-appendix {
             background: #f8f5f4;
@@ -829,6 +868,14 @@
             color: #4a4a4a;
         }
 
+        .ai-consensus {
+            border-left: 3px solid #6d1e91;
+            padding-left: 0.8rem;
+            background: #f0ecf0;
+            padding: 0.6rem 0.8rem;
+            border-radius: 4px;
+        }
+
         .ai-rejected {
             border-left: 3px solid #c0392b;
             padding-left: 0.8rem;
@@ -842,6 +889,15 @@
         .ai-human {
             border-left: 3px solid #cb8316;
             padding-left: 0.8rem;
+        }
+
+        .ai-prompt-box {
+            background: #ffffff;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #555;
+            border: 1px solid #e8e0e4;
         }
 
         /* Risk grid */
@@ -945,6 +1001,61 @@
         .scope-flow .arrow {
             color: #6d1e91;
             font-size: 1.2rem;
+        }
+
+        /* Commitment Position */
+        .commitment-position {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .commitment-col {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e8e0e4;
+            background: #ffffff;
+        }
+
+        .commitment-col.committed {
+            border-top: 4px solid #2f855a;
+        }
+
+        .commitment-col.cannot {
+            border-top: 4px solid #c0392b;
+        }
+
+        .commitment-col.conditional {
+            border-top: 4px solid #cb8316;
+        }
+
+        .commitment-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .commitment-col.committed .commitment-label {
+            color: #2f855a;
+        }
+
+        .commitment-col.cannot .commitment-label {
+            color: #c0392b;
+        }
+
+        .commitment-col.conditional .commitment-label {
+            color: #cb8316;
+        }
+
+        .commitment-col p {
+            font-size: 0.85rem;
+            color: #4a4a4a;
+            margin: 0;
+            max-width: 100%;
         }
 
         /* Dependency timeline */
@@ -1143,6 +1254,63 @@
             margin-top: 0.5rem;
         }
 
+        /* Vietnamese workflow card */
+        .workflow-card {
+            background: #f8f5f4;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            border: 1px solid #e8e0e4;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .workflow-card .wf-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6d1e91;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .workflow-card .wf-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #4a4a4a;
+        }
+
+        .workflow-card .wf-row strong {
+            color: #2d2d2d;
+        }
+
+        /* No-response fallback */
+        .no-response-box {
+            background: #fff5f4;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            border-left: 4px solid #cb8316;
+            margin: 1rem 0;
+        }
+
+        .no-response-box .nr-label {
+            font-family: 'Acherus Grotesque ExtraBold', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #cb8316;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .no-response-box p {
+            font-size: 0.85rem;
+            color: #4a4a4a;
+            margin: 0;
+            max-width: 100%;
+        }
+
         /* ============================================================
         FOOTER (assessment-oriented)
         ============================================================ */
@@ -1278,11 +1446,11 @@
             .collapsible-content {
                 max-height: none !important;
                 overflow: visible !important;
-                padding: 1rem 1.5rem !important;
+                padding: 1rem 1.5rem 1.5rem !important;
             }
 
             .collapsible-header {
-                display: none;
+                display: none !important;
             }
 
             .ai-appendix {
@@ -1324,6 +1492,10 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            .commitment-position {
+                grid-template-columns: 1fr;
+            }
+
             .footer-split {
                 grid-template-columns: 1fr;
             }
@@ -1331,6 +1503,10 @@
             .footer-right {
                 justify-content: center;
                 padding: 1.5rem;
+            }
+
+            .workflow-card .wf-row {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1419,6 +1595,23 @@
             .menu-box a {
                 font-size: 1.1rem;
             }
+
+            .commitment-position {
+                grid-template-columns: 1fr;
+            }
+
+            .matrix-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .matrix-x {
+                grid-column: span 1;
+            }
+
+            .matrix-label.top {
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1468,7 +1661,7 @@
             }
 
             .collapsible-content.open {
-                padding: 0.8rem 1rem 1rem;
+                padding: 0.8rem 1rem 1.5rem;
             }
 
             .ai-appendix {
@@ -1495,18 +1688,38 @@
                 font-size: 0.9rem;
             }
 
-            .matrix-grid {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
+            .commitment-col p {
+                font-size: 0.8rem;
             }
 
-            .matrix-x {
-                grid-column: span 1;
+            .email-block .email-body {
+                font-size: 0.85rem;
             }
+        }
 
-            .matrix-label.top {
-                text-align: center;
-            }
+        /* Focus styles for accessibility */
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #cb8316;
+            outline-offset: 3px;
+        }
+
+        /* ============================================================
+        CASE-SPECIFIC OVERRIDES
+        ============================================================ */
+        /* Ensure Vietnamese workflow card is visible */
+        .vietnamese-workflow {
+            margin-top: 1rem;
+        }
+
+        /* No-response fallback spacing */
+        .no-response-box {
+            margin-top: 1rem;
+        }
+
+        /* Commitment position spacing */
+        .commitment-position {
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -1605,14 +1818,22 @@
                 <div class="coordinator-call">
                     <div class="coordinator-call-label">Coordinator's Call</div>
                     <div class="coordinator-call-text">
-                        DO NOT ISSUE A FIRM QUOTE UNTIL SOURCE, SCOPE AND DELIVERY REQUIREMENTS ARE CONFIRMED.
+                        BUILD THE QUOTE PROVISIONALLY, BUT DO NOT TURN UNCONFIRMED SCOPE INTO A FIRM COMMITMENT.
                     </div>
+                </div>
+
+                <!-- Decision Logic -->
+                <div class="case-box decision-logic">
+                    <span class="case-box-label">Why This Order</span>
+                    <p>
+                        Source certainty gates scope; scope gates costing; delivery requirements and resource availability gate feasibility.
+                    </p>
                 </div>
 
                 <!-- The Real Problem -->
                 <div style="margin-bottom:1rem;">
                     <div class="case-box" style="background:#ede4f0; border-color:#6d1e91;">
-                        <span class="box-label" style="color:#6d1e91;">🔴 The real problem</span>
+                        <span class="case-box-label" style="color:#6d1e91;">🔴 The real problem</span>
                         <p style="font-size:0.95rem;">
                             <strong>Surface request:</strong> "send a quote today."<br />
                             <strong>Actual problem:</strong> inconsistent file inventory, a confidential document sent without being requested, a version conflict between two annual report files, and a Vietnamese MT request that introduces a quality/workflow trade-off.
@@ -1630,15 +1851,15 @@
                         <div class="table-scroll">
                             <table>
                                 <thead>
-                                    <tr><th>File</th><th>Status</th><th>Decision</th></tr>
+                                    <tr><th>File</th><th>Status</th><th>Reason</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td>Annual Report FINAL</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Conflicting source version</td></tr>
-                                    <tr><td>Annual Report v3</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Later modification ≠ approval</td></tr>
-                                    <tr><td>Appendix A Financials</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Scanned + handwritten content</td></tr>
-                                    <tr><td>Program Photos Captions</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Confirm tabs; exclude DO NOT USE</td></tr>
-                                    <tr><td>Board Roster</td><td><span class="status-badge out">OUT</span></td><td>Unrequested confidential material</td></tr>
-                                    <tr><td>Executive Summary</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Overlap + changed figures</td></tr>
+                                    <tr><td>RCHC_Annual_Report_2025_FINAL.docx</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Conflicts with another Annual Report version.</td></tr>
+                                    <tr><td>RCHC_Annual_Report_2025_v3.docx</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Later modification does not establish client approval.</td></tr>
+                                    <tr><td>Appendix_A_Financials.pdf</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Scanned PDF with handwritten notes; scope/content needs confirmation.</td></tr>
+                                    <tr><td>Program_Photos_Captions.xlsx</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Confirm which tabs are in scope; Tab 3 is marked DO NOT USE.</td></tr>
+                                    <tr><td>Board_Roster_CONFIDENTIAL.pdf</td><td><span class="status-badge out">OUT</span></td><td>Unrequested confidential material with direct contact details.</td></tr>
+                                    <tr><td>RCHC_Exec_Summary.docx</td><td><span class="status-badge confirm">CONFIRM</span></td><td>Overlaps the Annual Report and contains changed figures.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1654,20 +1875,20 @@
                     <div class="collapsible-content" id="case1-assumptions-content" role="region">
                         <p style="font-size:0.85rem; font-weight:600; color:#6d1e91; margin-bottom:0.5rem;">Working assumptions</p>
                         <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0; margin-bottom:1rem;">
-                            <li style="margin-bottom:0.3rem;"><strong>A1</strong> — Friday's board date is treated as a stakeholder milestone, not a confirmed translation deadline.</li>
+                            <li style="margin-bottom:0.3rem;"><strong>A1</strong> — Friday's board-packet date is treated as a stakeholder milestone, not a confirmed translation deadline.</li>
                             <li style="margin-bottom:0.3rem;"><strong>A2</strong> — The later modification date on v3 does not establish client approval; the approved source must be confirmed.</li>
                             <li style="margin-bottom:0.3rem;"><strong>A3</strong> — The Board Roster is out of scope unless explicitly requested.</li>
                             <li style="margin-bottom:0.3rem;"><strong>A4</strong> — The Executive Summary may represent revised/overlapping content rather than automatically adding 900 words to scope.</li>
                             <li style="margin-bottom:0.3rem;"><strong>A5</strong> — The standard linguistic workflow remains the baseline unless an alternative workflow is explicitly agreed.</li>
                         </ul>
-                        <p style="font-size:0.85rem; font-weight:600; color:#6d1e91; margin-bottom:0.5rem;">Questions for Nadia</p>
-                        <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0;">
-                            <li style="margin-bottom:0.3rem;"><strong>Q1</strong> — Which Annual Report file is the approved source: FINAL or v3?</li>
-                            <li style="margin-bottom:0.3rem;"><strong>Q2</strong> — What is the actual translation delivery date/time? Is Friday the translation deadline or only the board-packet date?</li>
-                            <li style="margin-bottom:0.3rem;"><strong>Q3</strong> — Is the Executive Summary a separate deliverable, a replacement/update to part of the report, or additional content?</li>
-                            <li style="margin-bottom:0.3rem;"><strong>Q4</strong> — Should the handwritten notes in Appendix A be included in translation scope?</li>
-                            <li style="margin-bottom:0.3rem;"><strong>Q5</strong> — Which tabs/content in the captions workbook should be translated?</li>
-                            <li style="margin-bottom:0.3rem;"><strong>Q6</strong> — For Vietnamese, are you requesting an alternative QA workflow, or should we maintain the standard translation + second-linguist review process?</li>
+                        <p style="font-size:0.85rem; font-weight:600; color:#6d1e91; margin-bottom:0.5rem;">Clarification questions</p>
+                        <ul style="font-size:0.85rem; color:#4a4a4a; list-style:none; padding:0; margin-bottom:1rem;">
+                            <li style="margin-bottom:0.3rem;"><strong>Q1</strong> — Which Annual Report file is the approved source: FINAL or v3?<br /><span style="font-size:0.75rem; color:#777;">Why: determines the correct source for translation.<br />Fallback: If no answer, use v3 as the most recent version and flag the assumption.</span></li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q2</strong> — What is the actual translation delivery date/time? Is Friday the translation deadline or only the board-packet date?<br /><span style="font-size:0.75rem; color:#777;">Why: determines scheduling and resource allocation.<br />Fallback: If no answer, assume the board-packet date is the delivery deadline.</span></li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q3</strong> — Is the Executive Summary a separate deliverable, a replacement/update to part of the report, or additional content?<br /><span style="font-size:0.75rem; color:#777;">Why: affects scope and cost.<br />Fallback: If no answer, treat it as a separate deliverable and flag the overlap.</span></li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q4</strong> — Should the handwritten notes in Appendix A be included in translation scope?<br /><span style="font-size:0.75rem; color:#777;">Why: handwritten content may require additional interpretation.<br />Fallback: If no answer, exclude handwritten notes and flag the assumption.</span></li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q5</strong> — Which tabs/content in the captions workbook should be translated?<br /><span style="font-size:0.75rem; color:#777;">Why: Tab 3 is marked DO NOT USE.<br />Fallback: If no answer, translate Tabs 1 and 2 only.</span></li>
+                            <li style="margin-bottom:0.3rem;"><strong>Q6</strong> — For Vietnamese, are you requesting an alternative QA workflow, or should we maintain the standard translation + second-linguist review process?<br /><span style="font-size:0.75rem; color:#777;">Why: determines quality level and cost.<br />Fallback: If no answer, maintain the standard workflow.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -1709,6 +1930,16 @@
                     <div class="scope-final">QUOTE</div>
                 </div>
 
+                <!-- Vietnamese Workflow -->
+                <div class="workflow-card vietnamese-workflow">
+                    <span class="wf-label">🇻🇳 Vietnamese Workflow</span>
+                    <div class="wf-row">
+                        <div><strong>Baseline</strong><br />Qualified human translation + second-linguist review.</div>
+                        <div><strong>Client request</strong><br />MT + light cleanup.</div>
+                        <div style="grid-column: span 2; margin-top:0.3rem;"><strong>Coordinator action</strong><br />Clarify requested QA level and quote/schedule that workflow separately rather than silently treating it as equivalent to the standard workflow.</div>
+                    </div>
+                </div>
+
                 <!-- Quality Controls -->
                 <div class="collapsible">
                     <button class="collapsible-header" aria-expanded="false" aria-controls="case1-quality-content">
@@ -1721,73 +1952,90 @@
                                 <thead><tr><th>Control</th><th>Purpose</th></tr></thead>
                                 <tbody>
                                     <tr><td>Approved-source lock</td><td>Production begins only against the confirmed source package.</td></tr>
-                                    <tr><td>Version register</td><td>Record the approved source and superseded versions in the project-management system.</td></tr>
+                                    <tr><td>Version register</td><td>Record approved and superseded files in the project-management system.</td></tr>
                                     <tr><td>Scope-controlled file package</td><td>Keep unrequested/confidential material outside the production package.</td></tr>
-                                    <tr><td>Scanned-content verification</td><td>Human verification of handwritten notes and image/chart text.</td></tr>
+                                    <tr><td>Scanned-content verification</td><td>Human verification of handwritten/image-based content and chart labels.</td></tr>
                                     <tr><td>Linguistic QA workflow</td><td>Qualified linguist → second linguist → internal check unless an alternative is explicitly agreed.</td></tr>
-                                    <tr><td>Final source-to-delivery check</td><td>Verify deliverables against the approved source package before release.</td></tr>
+                                    <tr><td>Final source-to-delivery check</td><td>Verify final deliverables against the approved source package before release.</td></tr>
                                 </tbody>
                             </table>
                         </div>
+                        <p style="font-size:0.85rem; color:#4a4a4a; margin-top:0.5rem;">
+                            <strong>Board Roster handling:</strong> Keep the unrequested Board Roster outside the production package and limit handling to what is necessary for intake/disposition.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Message to Client -->
-                <div class="message-box">
-                    <span class="msg-label">✉️ Reply to Nadia</span>
-                    <p>
-                        <em>"Thank you for reaching out. Before I send a quote, a few quick questions: 1) Which version of the annual report should I use? 2) The Executive Summary has overlap with different figures — single project or separate? 3) I received a 'Board Roster — CONFIDENTIAL' not mentioned — was this intentional? On Vietnamese: I'd recommend a brief conversation before quoting that approach — there are quality and liability considerations. I can have a quote to you within two hours of your reply."</em>
-                    </p>
+                <div class="email-block">
+                    <div class="email-to"><strong>TO:</strong> Nadia Okonjo (grants@riverbendhealth.org)</div>
+                    <div class="email-subject"><strong>SUBJECT:</strong> Re: Translation Quote Needed — Annual Report</div>
+                    <div class="email-body">
+                        <p style="margin-bottom:0.5rem;">Dear Nadia,</p>
+                        <p style="margin-bottom:0.5rem;">Thank you for reaching out. Before I send a quote, a few quick questions:</p>
+                        <ol style="font-size:0.9rem; color:#4a4a4a; margin-left:1.5rem; margin-bottom:0.5rem;">
+                            <li>Which version of the annual report should I use as the source?</li>
+                            <li>The Executive Summary has overlap with the report but with different figures — should I treat this as a single project or separate deliverables?</li>
+                            <li>I received a document labeled "Board Roster — CONFIDENTIAL" that wasn't mentioned in your email. Was this intentional?</li>
+                        </ol>
+                        <p style="margin-bottom:0.5rem;">On Vietnamese: I'd recommend a brief conversation before quoting that approach — there are quality and liability considerations I'd like to walk you through.</p>
+                        <p>Once I have these confirmations, I can turn the quote around promptly.</p>
+                        <p style="margin-top:0.5rem;">Best regards,<br />Ariane Lesnyak</p>
+                    </div>
                 </div>
 
                 <!-- AI Appendix -->
                 <div class="ai-appendix" id="case-1-ai">
                     <h5>🤖 AI Use Appendix — Case 1</h5>
                     <div class="ai-grid">
-                        <div><strong>Tool:</strong> ChatGPT-4</div>
-                        <div><strong>Effort:</strong> 65% human / 35% AI</div>
+                        <div><strong>AI TOOLS</strong> ChatGPT · Claude · DeepSeek</div>
+                        <div><strong>Method:</strong> Same core prompt used across the three models; outputs compared against the Candidate Packet and Scoring Rubric, then reviewed and corrected by the candidate.</div>
 
                         <div class="ai-full">
-                            <div class="ai-label">Prompt</div>
-                            <div class="ai-content" style="background:#fff; padding:0.5rem 0.8rem; border-radius:6px; font-size:0.85rem; color:#555;">
-                                "Analyze this file inventory and identify risks, ambiguities, and scope issues. Draft a reply to the client with the necessary questions. Max 200 words."
+                            <div class="ai-label">Principal Prompt</div>
+                            <div class="ai-prompt-box">
+                                "Review this MAPA Translation Project Coordinator case and produce a solution for every required deliverable. Use only facts stated in the Candidate Packet. Separate facts, unknowns and assumptions. Identify the real operational problem before proposing actions. Identify binding constraints, dependencies, decision owners, risks, triggers and feasible contingencies. Use project-coordination terminology. Stress-test the recommendation against the seven dimensions in the scoring rubric. Do not invent missing information."
                             </div>
                         </div>
 
                         <div class="ai-full">
-                            <div class="ai-label">Useful Output</div>
-                            <div class="ai-content">
-                                <ul style="list-style:none; padding:0; margin:0;">
-                                    <li>• Flagged Board Roster as a confidentiality issue</li>
-                                    <li>• Identified Tab 3 "DO NOT USE" as an exclusion</li>
-                                    <li>• Drafted Nadia reply structure quickly</li>
+                            <div class="ai-label">Model Consensus</div>
+                            <div class="ai-consensus">
+                                <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; color:#4a4a4a;">
+                                    <li><strong>ChatGPT:</strong> source/scope ambiguity; confidentiality; structured action plan.</li>
+                                    <li><strong>Claude:</strong> version conflict; Board Roster; DO NOT USE; need for assumptions/questions.</li>
+                                    <li><strong>DeepSeek:</strong> source ambiguity; scope clarification; Vietnamese workflow issue; conditional quoting.</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 1</div>
-                            <div class="ai-content">AI treated the later-modified v3 file as potentially authoritative; I rejected that conclusion because modification date does not establish approval.</div>
+                            <div class="ai-label">Human Correction 1</div>
+                            <div class="ai-content">v3 later modification ≠ approved source — I rejected the assumption that the newer file is necessarily the correct source.</div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 2</div>
-                            <div class="ai-content">AI initially treated the Executive Summary as additional scope; I reframed it as a version/scope dependency because it overlaps the report and changes figures.</div>
+                            <div class="ai-label">Human Correction 2</div>
+                            <div class="ai-content">Executive Summary ≠ automatically +900 words — I reframed it as a version/scope dependency because it overlaps the report and changes figures.</div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 3</div>
-                            <div class="ai-content">AI treated Vietnamese MT as a policy conflict; I corrected this to a quality/workflow trade-off because the packet does not prohibit MTPE.</div>
+                            <div class="ai-label">Human Correction 3</div>
+                            <div class="ai-content">Vietnamese MT ≠ company-policy violation — I corrected to a quality/workflow trade-off because the packet does not prohibit MTPE.</div>
                         </div>
 
                         <div class="ai-full ai-verified">
                             <div class="ai-label">Verification</div>
-                            <div class="ai-content">Factual claims were checked against the Candidate Packet. No external facts were used to resolve the fictional scenarios. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
+                            <div class="ai-content">All factual claims and decisions were checked against the Candidate Packet. No external facts were used to resolve the scenario. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
                         </div>
 
                         <div class="ai-full ai-human">
                             <div class="ai-label">Human-Owned Judgment</div>
                             <div class="ai-content">Whether to issue a firm or conditional quote.</div>
+                        </div>
+
+                        <div class="ai-full">
+                            <div><strong>Effort split:</strong> ~70% human reasoning / ~30% AI-assisted analysis, comparison and drafting</div>
                         </div>
                     </div>
                 </div>
@@ -1814,7 +2062,7 @@
                 <!-- The Real Problem -->
                 <div style="margin-bottom:1rem;">
                     <div class="case-box" style="background:#ede4f0; border-color:#6d1e91;">
-                        <span class="box-label" style="color:#6d1e91;">🔴 The real problem</span>
+                        <span class="case-box-label" style="color:#6d1e91;">🔴 The real problem</span>
                         <p style="font-size:0.95rem;">
                             <strong>Surface request:</strong> "implement all comments + add legal warning."<br />
                             <strong>Actual problem:</strong> hard print deadline (Thu 12 PM ET) + conflicting instructions + a safety/legal change that requires <strong>written confirmation</strong> before going to print. The English master is already in Northline's prepress queue.
@@ -1823,10 +2071,10 @@
                 </div>
 
                 <!-- Prioritization Logic -->
-                <div class="case-box" style="background:#f8f5f4; border-color:#cb8316;">
-                    <span class="box-label" style="color:#cb8316;">🎯 Prioritization Logic</span>
-                    <p style="font-size:0.9rem;">
-                        The binding constraint is Northline's Thursday 12 PM ET cutoff. Because Pavel is unavailable Thursday before 1 PM, all production DTP must be completed Wednesday. Therefore, I resolve decisions that can block DTP first, while preserving Thursday morning for QA/recovery rather than planned production.
+                <div class="case-box decision-logic">
+                    <span class="case-box-label">Prioritization Logic</span>
+                    <p>
+                        The binding constraint is Northline's Thursday 12:00 PM ET cutoff. Because Pavel is unavailable Thursday before 1:00 PM, production DTP must be completed Wednesday. I therefore resolve the decisions that can block DTP first and preserve Thursday morning for QA/recovery.
                     </p>
                 </div>
 
@@ -1837,27 +2085,26 @@
                         <span>THURSDAY</span>
                     </div>
                     <div class="timeline-track">
-                        <div class="tl-row"><span class="tl-time">10:15</span><span class="tl-event">Grant clarification</span></div>
-                        <div class="tl-row"><span class="tl-time">10:20</span><span class="tl-event">Comment triage</span></div>
-                        <div class="tl-row"><span class="tl-time">10:30</span><span class="tl-event">DTP batch 1</span></div>
-                        <div class="tl-row"><span class="tl-time">12:00</span><span class="tl-event">Client confirmation</span></div>
-                        <div class="tl-row"><span class="tl-time">14:00</span><span class="tl-event"><strong style="color:#6d1e91;">GO / NO-GO</strong></span></div>
-                        <div class="tl-row"><span class="tl-time">↓</span><span class="tl-arrow">→</span><span class="tl-event">DTP batch 2</span></div>
+                        <div class="tl-row"><span class="tl-time">10:15 AM</span><span class="tl-event">Triage comments + identify blocking decisions</span></div>
+                        <div class="tl-row"><span class="tl-time">10:30 AM</span><span class="tl-event">Confirm Pavel's Wednesday capacity window and reserve DTP time</span></div>
+                        <div class="tl-row"><span class="tl-time">12:00 PM</span><span class="tl-event">Client confirmation checkpoint</span></div>
+                        <div class="tl-row"><span class="tl-time">2:00 PM</span><span class="tl-event"><strong style="color:#6d1e91;">GO / NO-GO</strong></span></div>
+                        <div class="tl-row"><span class="tl-time">↓</span><span class="tl-arrow">→</span><span class="tl-event">Complete confirmed DTP changes</span></div>
                         <div class="tl-row"><span class="tl-time">↓</span><span class="tl-arrow">→</span><span class="tl-event">Internal QA</span></div>
                     </div>
                     <div class="timeline-cutoff">
                         <span>THU 12:00 PM ET</span>
-                        <strong>HARD CUTOFF</strong>
+                        <strong>NORTHLINE HARD CUTOFF</strong>
                     </div>
                     <div class="timeline-buffer">
-                        Thursday AM = QA / recovery buffer, not planned DTP capacity.
+                        Thursday AM = QA / recovery buffer — not planned DTP capacity.
                     </div>
                 </div>
 
                 <!-- Hard Cutoff Visual -->
                 <div class="hard-cutoff">
                     <span>THU 12:00 PM ET</span>
-                    <strong>HARD CUTOFF — Northline press run</strong>
+                    <strong>NORTHLINE HARD CUTOFF</strong>
                 </div>
 
                 <!-- Triage -->
@@ -1876,50 +2123,67 @@
                                     <tr><td>Style overriding approved glossary</td><td>5</td><td>Hold; need written client override</td></tr>
                                     <tr><td>Contradictory comments</td><td>4</td><td>Flag to Camila; implement neither</td></tr>
                                     <tr><td>Safety warning softening</td><td>1</td><td><span class="danger">Hard stop — written approval required</span></td></tr>
-                                    <tr><td>Legal line (Grant)</td><td>1</td><td><span class="danger">Hard stop — written approval + English source update</span></td></tr>
+                                    <tr><td>Legal line (Grant)</td><td>1</td><td><span class="danger">Hard stop — source/version consistency issue</span></td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- Decision Matrix -->
+                <!-- Risk / Decision Table -->
                 <div class="collapsible">
-                    <button class="collapsible-header" aria-expanded="false" aria-controls="case2-decision-content">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case2-risk-content">
                         ⚖️ Risk / Decision Table
                         <span class="arrow">▾</span>
                     </button>
-                    <div class="collapsible-content" id="case2-decision-content" role="region">
+                    <div class="collapsible-content" id="case2-risk-content" role="region">
                         <div class="table-scroll">
                             <table>
                                 <thead><tr><th>Decision / Issue</th><th>Risk</th><th>Owner</th><th>Trigger</th><th>Action</th></tr></thead>
                                 <tbody>
-                                    <tr><td>6 objective errors</td><td>Accuracy</td><td>Linguistic reviewer</td><td>Identified</td><td>Implement + verify</td></tr>
-                                    <tr><td>5 glossary conflicts</td><td>Terminology consistency</td><td>Client decision owner</td><td>Requested override</td><td>Hold until confirmed</td></tr>
-                                    <tr><td>4 contradictory comments</td><td>Wrong implementation</td><td>Camila / Grant</td><td>No clarification</td><td>Implement neither</td></tr>
-                                    <tr><td>2 safety changes</td><td>Regulatory/quality</td><td>Grant</td><td>No written confirmation</td><td>Hold affected text</td></tr>
-                                    <tr><td>Legal wording</td><td>Cross-language consistency</td><td>Grant</td><td>Final wording unclear</td><td>Confirm before propagation</td></tr>
-                                    <tr><td>Chinese reflow</td><td>DTP delay</td><td>Pavel</td><td>Text expansion</td><td>Reserve DTP capacity</td></tr>
-                                    <tr><td>Thu 12 PM cutoff</td><td>Press-run failure</td><td>Coordinator</td><td>Work incomplete Wed</td><td>Escalate / reassess</td></tr>
+                                    <tr><td>6 clear errors</td><td>Accuracy</td><td>Linguistic reviewer / coordinator</td><td>Identified</td><td>Implement + verify</td></tr>
+                                    <tr><td>14 stylistic preferences</td><td>Client preference vs consistency</td><td>Client reviewer / coordinator</td><td>No conflict with approved standards</td><td>Review and implement where appropriate</td></tr>
+                                    <tr><td>5 glossary conflicts</td><td>Terminology inconsistency</td><td>Client decision owner</td><td>Override requested</td><td>Hold until confirmed</td></tr>
+                                    <tr><td>4 contradictory comments</td><td>Wrong implementation</td><td>Client decision owner</td><td>No clarification</td><td>Implement neither</td></tr>
+                                    <tr><td>Camila's safety wording</td><td>Safety/regulatory risk</td><td>Client</td><td>No written confirmation</td><td>Hold affected change</td></tr>
+                                    <tr><td>Grant's legal wording</td><td>Cross-language source/version consistency</td><td>Client + coordinator</td><td>Final wording needs alignment</td><td>Confirm authoritative source and propagate consistently</td></tr>
+                                    <tr><td>Chinese reflow</td><td>DTP delay</td><td>Pavel</td><td>Text expansion</td><td>Compare before/after page flow; reflow pages 7–12 as needed</td></tr>
+                                    <tr><td>Thursday cutoff</td><td>Missed press run</td><td>Coordinator</td><td>Work incomplete Wednesday</td><td>Escalate / reassess</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
+                <!-- No-response fallback -->
+                <div class="no-response-box">
+                    <span class="nr-label">⚠️ If client confirmation is not received</span>
+                    <p>At the go/no-go checkpoint, separate changes that are safe and ready to proceed from changes that still require client authority. Document unresolved items and escalate the schedule/print trade-off. Do not silently implement contradictory or unconfirmed safety changes just to preserve the deadline.</p>
+                </div>
+
                 <!-- Messages -->
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0;">
-                    <div class="message-box" style="border-left-color:#cb8316;">
-                        <span class="msg-label">✉️ To Grant Whitcomb</span>
-                        <p style="font-size:0.85rem;">
-                            <em>"Two things need written confirmation: 1) Safety warning — per our process, any safety statement change requires written confirmation. 2) Legal line — English master already in prepress with '36 months.' Implementing '3 years' creates a version conflict. Need response by 2:00 PM ET to make Thursday deadline."</em>
-                        </p>
+                <div class="email-block" style="border-left-color:#cb8316;">
+                    <div class="email-to"><strong>TO:</strong> Grant Whitcomb</div>
+                    <div class="email-subject"><strong>SUBJECT:</strong> Brazilian Portuguese Review — Action Needed Before 2:00 PM Today</div>
+                    <div class="email-body">
+                        <p style="margin-bottom:0.5rem;">Hi Grant,</p>
+                        <p style="margin-bottom:0.5rem;">Thank you for forwarding Camila's feedback and the legal update. Two things need your written confirmation before I can proceed:</p>
+                        <p style="margin-bottom:0.5rem;"><strong>Safety warning:</strong> One of Camila's comments softens the open-flame warning. Per our process, any safety statement change requires written client confirmation before print. Please confirm: keep approved wording or adopt the change?</p>
+                        <p style="margin-bottom:0.5rem;"><strong>Legal line:</strong> The approved English source reads "36 months." Implementing "3 years" in translations while the English master is already in Northline's queue creates a version conflict. I need written confirmation and clarity on whether the English insert will also be updated.</p>
+                        <p>I'm implementing the six clear errors now. I need your response by 2:00 PM ET today to make the Thursday deadline.</p>
+                        <p style="margin-top:0.5rem;">Thanks,<br />Ariane</p>
                     </div>
-                    <div class="message-box" style="border-left-color:#cb8316;">
-                        <span class="msg-label">✉️ To Pavel</span>
-                        <p style="font-size:0.85rem;">
-                            <em>"I'm sending six confirmed corrections now. I'm working through remaining feedback with the client and expect a second batch by 2:00 PM. Can you complete both rounds and return final files by 6:00 PM?"</em>
-                        </p>
+                </div>
+
+                <div class="email-block" style="border-left-color:#6d1e91;">
+                    <div class="email-to"><strong>TO:</strong> Pavel R.</div>
+                    <div class="email-subject"><strong>SUBJECT:</strong> Brazilian Portuguese — Changes Coming in Two Waves</div>
+                    <div class="email-body">
+                        <p style="margin-bottom:0.5rem;">Hi Pavel,</p>
+                        <p style="margin-bottom:0.5rem;">I have six hours of your Wednesday capacity to work with. Can you confirm your available window and whether you can accommodate a first batch of confirmed corrections followed by a second batch after the client decision point?</p>
+                        <p style="margin-bottom:0.5rem;">The first batch is six corrections — clear errors, no approvals needed. I'm working through the remaining feedback with the client and expect a second batch by 2:00 PM.</p>
+                        <p>Also, please be aware of the Chinese reflow risk: pages 7–12 may shift depending on text changes.</p>
+                        <p style="margin-top:0.5rem;">Thanks,<br />Ariane</p>
                     </div>
                 </div>
 
@@ -1936,7 +2200,7 @@
                             <li style="margin-bottom:0.3rem;">✅ Internal check before Northline delivery</li>
                             <li style="margin-bottom:0.3rem;">✅ Version control: all files timestamped</li>
                             <li style="margin-bottom:0.3rem;">✅ Confidential content: contracted tools only</li>
-                            <li style="margin-bottom:0.3rem;">✅ Reflow risk: reserve DTP capacity; evaluate impact</li>
+                            <li style="margin-bottom:0.3rem;">✅ Chinese reflow: compare before/after page flow; reflow pages 7–12 as needed</li>
                         </ul>
                     </div>
                 </div>
@@ -1945,50 +2209,62 @@
                 <div class="ai-appendix" id="case-2-ai">
                     <h5>🤖 AI Use Appendix — Case 2</h5>
                     <div class="ai-grid">
-                        <div><strong>Tool:</strong> ChatGPT-4</div>
-                        <div><strong>Effort:</strong> 60% human / 40% AI</div>
+                        <div><strong>AI TOOLS</strong> ChatGPT · Claude · DeepSeek</div>
+                        <div><strong>Method:</strong> Same core prompt used across the three models; outputs compared against the Candidate Packet and Scoring Rubric, then reviewed and corrected by the candidate.</div>
 
                         <div class="ai-full">
-                            <div class="ai-label">Prompt</div>
-                            <div class="ai-content" style="background:#fff; padding:0.5rem 0.8rem; border-radius:6px; font-size:0.85rem; color:#555;">
-                                "Analyze this scenario and structure a prioritized action plan. Triage these 31 comments by risk and approval requirements. Draft a 175-word message to the client flagging the safety and legal conflicts."
+                            <div class="ai-label">Principal Prompt</div>
+                            <div class="ai-prompt-box">
+                                "Review this MAPA Translation Project Coordinator case and produce a solution for every required deliverable. Use only facts stated in the Candidate Packet. Separate facts, unknowns and assumptions. Identify the real operational problem before proposing actions. Identify binding constraints, dependencies, decision owners, risks, triggers and feasible contingencies. Use project-coordination terminology. Stress-test the recommendation against the seven dimensions in the scoring rubric. Do not invent missing information."
                             </div>
                         </div>
 
                         <div class="ai-full">
-                            <div class="ai-label">Useful Output</div>
-                            <div class="ai-content">
-                                <ul style="list-style:none; padding:0; margin:0;">
-                                    <li>• Flagged the Chinese reflow dependency</li>
-                                    <li>• Drafted initial message to Grant quickly</li>
-                                    <li>• Helped structure the decision matrix</li>
+                            <div class="ai-label">Model Consensus</div>
+                            <div class="ai-consensus">
+                                <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; color:#4a4a4a;">
+                                    <li>All three models identified: Northline's Thursday noon cutoff; Pavel's constrained availability; need to triage comments; safety/legal risk.</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 1</div>
-                            <div class="ai-content">AI grouped safety warning with stylistic preferences — I separated it: safety statements are categorically different.</div>
+                            <div class="ai-label">Human Correction 1</div>
+                            <div class="ai-content">Safety warning ≠ stylistic preference — I separated these because they require different decision paths.</div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 2</div>
-                            <div class="ai-content">AI suggested implementing legal line "pending confirmation" — I rejected; company policy requires confirmation before action.</div>
+                            <div class="ai-label">Human Correction 2</div>
+                            <div class="ai-content">Glossary conflicts require a distinct decision path — I created a separate category for comments that override approved terminology.</div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 3</div>
-                            <div class="ai-content">AI scheduled DTP production Thursday — I corrected: Pavel is unavailable before 1 PM; complete production Wednesday and preserve Thursday AM for QA/recovery.</div>
+                            <div class="ai-label">Human Correction 3</div>
+                            <div class="ai-content">Pavel's exact six-hour window cannot be invented — I removed the assumption of a specific 10:30–18:00 window and asked Pavel to confirm his availability.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Human Correction 4</div>
+                            <div class="ai-content">Chinese reflow is a concrete downstream dependency — I added specific action: compare before/after page flow; reflow pages 7–12 as needed.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Human Correction 5</div>
+                            <div class="ai-content">Legal wording is also a source/version-consistency issue — I reframed it as needing alignment with the English master already in prepress.</div>
                         </div>
 
                         <div class="ai-full ai-verified">
                             <div class="ai-label">Verification</div>
-                            <div class="ai-content">Confirmed Pavel's Thursday unavailability from packet — built entire timeline around this. Confirmed English master was already in prepress before flagging the legal conflict as critical. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
+                            <div class="ai-content">All factual claims and decisions were checked against the Candidate Packet. No external facts were used to resolve the scenario. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
                         </div>
 
                         <div class="ai-full ai-human">
                             <div class="ai-label">Human-Owned Judgment</div>
-                            <div class="ai-content">Go/no-go time set at 2:00 PM (AI suggested 3:00). I moved it after calculating minimum DTP + internal check time.</div>
+                            <div class="ai-content">Which unresolved issues require client confirmation and which can proceed under the existing approved workflow.</div>
+                        </div>
+
+                        <div class="ai-full">
+                            <div><strong>Effort split:</strong> ~70% human reasoning / ~30% AI-assisted analysis, comparison and drafting</div>
                         </div>
                     </div>
                 </div>
@@ -2015,10 +2291,10 @@
                 <!-- The Real Problem -->
                 <div style="margin-bottom:1rem;">
                     <div class="case-box" style="background:#ede4f0; border-color:#6d1e91;">
-                        <span class="box-label" style="color:#6d1e91;">🔴 The real problem</span>
+                        <span class="case-box-label" style="color:#6d1e91;">🔴 The real problem</span>
                         <p style="font-size:0.95rem;">
                             <strong>Surface request:</strong> manage 4 projects + win a new prospect.<br />
-                            <strong>Actual problem:</strong> Project D has a <strong>non-refundable studio booking Wednesday 2–4 PM</strong> requiring a final reviewed Haitian Creole script — and the translator has been <strong>silent since Saturday</strong>. Everything else is subordinate to this.
+                            <strong>Actual problem:</strong> Project D has a <strong>non-refundable studio booking Wednesday 2–4 PM</strong> requiring a final reviewed Haitian Creole script — and the translator has not answered three emails since Thursday; he delivered 60% of the script on Saturday. <strong>Project D is the most time-critical external dependency; I protect it in parallel with Project A's Tuesday commitment.</strong>
                         </p>
                     </div>
                 </div>
@@ -2043,36 +2319,52 @@
                     </p>
                 </div>
 
-                <!-- Commitment Matrix -->
+                <!-- Workstream Status -->
                 <div style="margin:1rem 0; background:#f8f5f4; border-radius:12px; padding:1rem; border:1px solid #e8e0e4;">
                     <h5 style="font-family:'Acherus Grotesque ExtraBold', sans-serif; font-size:0.75rem; letter-spacing:1px; color:#6d1e91; margin-bottom:0.5rem;">📋 Workstream Status</h5>
                     <div class="table-scroll">
                         <table>
                             <thead><tr><th>Workstream</th><th>Status</th><th>Why</th></tr></thead>
                             <tbody>
-                                <tr><td>Project A</td><td><span class="status-badge committed">COMMITTED</span></td><td>Tuesday 12 PM</td></tr>
-                                <tr><td>Project B</td><td><span class="status-badge committed">COMMITTED</span></td><td>Wednesday 3 PM</td></tr>
-                                <tr><td>Project C</td><td><span class="status-badge conditional">CONDITIONAL</span></td><td>Source discrepancy requires verification</td></tr>
-                                <tr><td>Project D</td><td><span class="status-badge critical">CRITICAL DEPENDENCY</span></td><td>Wednesday 2–4 PM studio; reviewed script required</td></tr>
-                                <tr><td>Sable Ridge</td><td><span class="status-badge conditional">CONDITIONAL OFFER</span></td><td>Russian capacity not yet verified</td></tr>
+                                <tr><td>Project A</td><td><span class="status-badge committed">COMMITTED</span></td><td>Tuesday 12 PM commitment.</td></tr>
+                                <tr><td>Project B</td><td><span class="status-badge committed">COMMITTED</span></td><td>Wednesday 3 PM commitment; translator confirmed.</td></tr>
+                                <tr><td>Project C</td><td><span class="status-badge conditional">CONDITIONAL</span></td><td>Source discrepancy must be verified.</td></tr>
+                                <tr><td>Project D</td><td><span class="status-badge critical">CRITICAL DEPENDENCY</span></td><td>Wednesday 2–4 PM studio; final reviewed script required.</td></tr>
+                                <tr><td>Sable Ridge</td><td><span class="status-badge conditional">CONDITIONAL OFFER</span></td><td>Russian capacity not yet verified.</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Fact / Unknown / Decision -->
+                <!-- Commitment Position -->
+                <div class="commitment-position">
+                    <div class="commitment-col committed">
+                        <span class="commitment-label">COMMIT</span>
+                        <p>Protect existing committed deliveries A–D and actively manage their stated dependencies.</p>
+                    </div>
+                    <div class="commitment-col cannot">
+                        <span class="commitment-label">CANNOT COMMIT</span>
+                        <p>Sable Ridge's Wednesday 5:00 PM bilingual delivery yet.</p>
+                    </div>
+                    <div class="commitment-col conditional">
+                        <span class="commitment-label">CONDITIONAL</span>
+                        <p>Sable Ridge becomes commit-able only if Russian capacity, suitability and turnaround are verified without displacing an existing commitment.</p>
+                    </div>
+                </div>
+
+                <!-- Fact / Unknown / Decision — Aristide -->
                 <div class="fud-grid">
                     <div class="fud-card fact">
                         <div class="fud-label">FACT</div>
-                        <div class="fud-content">Aristide has delivered approximately 60% of the Haitian Creole script.</div>
+                        <div class="fud-content">Aristide delivered 60% Saturday and has not answered three emails since Thursday.</div>
                     </div>
                     <div class="fud-card unknown">
                         <div class="fud-label">UNKNOWN</div>
-                        <div class="fud-content">Whether he can deliver the remaining 40% in time for review before Wednesday's studio session.</div>
+                        <div class="fud-content">Whether he can deliver the remaining script in time for review before Wednesday 2 PM.</div>
                     </div>
                     <div class="fud-card decision">
                         <div class="fud-label">DECISION</div>
-                        <div class="fud-content">Set a response trigger and activate backup sourcing if confirmation is not received.</div>
+                        <div class="fud-content">Set an 11:30 AM response trigger and activate backup sourcing if there is no confirmation.</div>
                     </div>
                 </div>
 
@@ -2097,7 +2389,7 @@
                             </div>
                             <div style="text-align:center; color:#6d1e91; font-size:0.8rem;">↓</div>
                             <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #c0392b;">
-                                <strong>ESCALATION</strong> — Studio decision / manager escalation
+                                <strong>ESCALATION</strong> — Manager / studio decision
                             </div>
                             <div style="text-align:center; color:#6d1e91; font-size:0.8rem;">↓</div>
                             <div style="display:flex; align-items:center; gap:0.5rem; background:#fff; padding:0.5rem 0.8rem; border-radius:6px; border-left:3px solid #888;">
@@ -2107,6 +2399,25 @@
                         <p style="font-size:0.8rem; color:#777; margin-top:0.8rem;">
                             <strong>Backup activation trigger:</strong> No confirmation from Aristide by 11:30 AM ET.
                         </p>
+                        <p style="font-size:0.8rem; color:#777; margin-top:0.3rem;">
+                            <strong>Backup success criterion:</strong> The replacement resource must be able to deliver a final reviewed script before the Wednesday 2 PM recording session.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Fact / Unknown / Decision — Project C -->
+                <div class="fud-grid" style="margin-top:1.5rem;">
+                    <div class="fud-card fact">
+                        <div class="fud-label">FACT</div>
+                        <div class="fud-content">The reviewer reports a discrepancy between the public website rate table and the supplied PDF.</div>
+                    </div>
+                    <div class="fud-card unknown">
+                        <div class="fud-label">UNKNOWN</div>
+                        <div class="fud-content">Whether the client changed the authoritative source.</div>
+                    </div>
+                    <div class="fud-card decision">
+                        <div class="fud-label">DECISION</div>
+                        <div class="fud-content">Verify the authoritative source before continuing review of the disputed content.</div>
                     </div>
                 </div>
 
@@ -2128,7 +2439,7 @@
                                     <tr><td>9:45 AM</td><td>Confirm Project A final check status</td></tr>
                                     <tr><td>10:00 AM</td><td>Check in with Project B translator</td></tr>
                                     <tr><td>10:30 AM</td><td>Escalation note to manager re: Sable Ridge</td></tr>
-                                    <tr><td>11:00 AM</td><td>Decision point: Aristide responded? If not, activate backup</td></tr>
+                                    <tr><td>11:30 AM</td><td>Decision point: Aristide responded? If not, activate backup</td></tr>
                                     <tr><td>EOD</td><td>Haitian Creole script path confirmed (Aristide or backup)</td></tr>
                                 </tbody>
                             </table>
@@ -2136,19 +2447,25 @@
                     </div>
                 </div>
 
-                <!-- Fact/Unknown/Decision for Project C -->
-                <div class="fud-grid" style="margin-top:1.5rem;">
-                    <div class="fud-card fact">
-                        <div class="fud-label">FACT</div>
-                        <div class="fud-content">Reviewer reports that the public website rate table differs from the supplied PDF.</div>
-                    </div>
-                    <div class="fud-card unknown">
-                        <div class="fud-label">UNKNOWN</div>
-                        <div class="fud-content">Whether the client changed the authoritative source.</div>
-                    </div>
-                    <div class="fud-card decision">
-                        <div class="fud-label">DECISION</div>
-                        <div class="fud-content">Verify the authoritative source before allowing review of the disputed content to continue.</div>
+                <!-- Risk / Decision Table -->
+                <div class="collapsible">
+                    <button class="collapsible-header" aria-expanded="false" aria-controls="case3-risk-content">
+                        ⚖️ Risk & Decision Table
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="collapsible-content" id="case3-risk-content" role="region">
+                        <div class="table-scroll">
+                            <table>
+                                <thead><tr><th>Risk / Decision</th><th>Read</th><th>Action</th><th>Escalate?</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Aristide silent</td><td>Studio dependency at risk</td><td>11:30 AM trigger → backup sourcing</td><td>Yes if no viable backup</td></tr>
+                                    <tr><td>Project A</td><td>Earliest hard client commitment</td><td>Protect final check and delivery</td><td>If status slips</td></tr>
+                                    <tr><td>Project B</td><td>Confirmed resource but not started</td><td>Confirm kickoff/progress</td><td>If capacity slips</td></tr>
+                                    <tr><td>Project C</td><td>Source discrepancy reported</td><td>Verify authoritative source</td><td>Yes if unresolved</td></tr>
+                                    <tr><td>Sable Ridge</td><td>Russian capacity unverified</td><td>Qualify resource; no commitment yet</td><td>Yes for commercial trade-off</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -2165,21 +2482,28 @@
                         <li style="margin-bottom:0.2rem;">4. Confirm turnaround feasibility.</li>
                         <li style="margin-bottom:0.2rem;">5. Only then offer a conditional commitment.</li>
                     </ul>
-                </div>
-
-                <!-- Escalation -->
-                <div class="message-box" style="border-left-color:#cb8316;">
-                    <span class="msg-label">📤 Escalation to Manager</span>
-                    <p style="font-size:0.85rem;">
-                        <em>"I can protect the four committed projects, but I cannot responsibly commit to Sable Ridge's Wednesday 5 PM delivery yet. Recommended path: protect A–D first; give Aristide a defined response trigger and activate backup sourcing if needed. Qualify Sable Ridge's Russian capacity in parallel, but keep the prospect commitment conditional. Trade-off: accepting Sable Ridge's deadline now could put existing client commitments at risk. If MAPA wants to pursue the prospect at all costs, I would need an explicit decision about which existing commitment can move."</em>
+                    <p style="font-size:0.8rem; color:#777; margin-top:0.5rem;">
+                        <strong>Commercial option:</strong> Qualify the prospect immediately and offer an alternative delivery only if the prospect is willing to renegotiate scope or timing.
                     </p>
                 </div>
 
+                <!-- Escalation -->
+                <div class="email-block" style="border-left-color:#cb8316;">
+                    <div class="email-to"><strong>TO:</strong> Manager</div>
+                    <div class="email-subject"><strong>SUBJECT:</strong> Capacity assessment — new prospect and Project D risk</div>
+                    <div class="email-body">
+                        <p style="margin-bottom:0.5rem;">I can protect the four committed projects, but I cannot responsibly commit to Sable Ridge's Wednesday 5 PM delivery yet.</p>
+                        <p style="margin-bottom:0.5rem;"><strong>Recommended path:</strong> protect A–D first; give Aristide a defined response trigger and activate backup sourcing if needed. Qualify Sable Ridge's Russian capacity in parallel, but keep the prospect commitment conditional.</p>
+                        <p style="margin-bottom:0.5rem;"><strong>Trade-off:</strong> accepting Sable Ridge's deadline now could put existing client commitments at risk. If MAPA wants to pursue the prospect at all costs, I would need an explicit decision about which existing commitment can move.</p>
+                        <p style="margin-top:0.5rem;">What's your call?</p>
+                    </div>
+                </div>
+
                 <!-- Message to Aristide -->
-                <div class="message-box" style="border-left-color:#cb8316;">
+                <div class="message-box" style="border-left-color:#6d1e91;">
                     <span class="msg-label">✉️ To D. Aristide</span>
                     <p style="font-size:0.85rem;">
-                        <em>"I wanted to check in on the Haitian Creole script. You delivered 60% on Saturday — thank you. The recording session is booked Wednesday 2 PM and requires a final reviewed script. I need to hear from you today to confirm you can deliver the remaining 40% by Tuesday EOD."</em>
+                        Please confirm by 11:30 AM ET today whether you can complete the remaining script in time for review before Wednesday's 2:00 PM recording session. If I don't hear from you by then, I'll activate backup sourcing to protect the studio booking. Please also flag immediately if anything is affecting your availability.
                     </p>
                 </div>
 
@@ -2216,50 +2540,62 @@
                 <div class="ai-appendix" id="case-3-ai">
                     <h5>🤖 AI Use Appendix — Case 3</h5>
                     <div class="ai-grid">
-                        <div><strong>Tool:</strong> ChatGPT-4</div>
-                        <div><strong>Effort:</strong> 55% human / 45% AI</div>
+                        <div><strong>AI TOOLS</strong> ChatGPT · Claude · DeepSeek</div>
+                        <div><strong>Method:</strong> Same core prompt used across the three models; outputs compared against the Candidate Packet and Scoring Rubric, then reviewed and corrected by the candidate.</div>
 
                         <div class="ai-full">
-                            <div class="ai-label">Prompt</div>
-                            <div class="ai-content" style="background:#fff; padding:0.5rem 0.8rem; border-radius:6px; font-size:0.85rem; color:#555;">
-                                "Three events happen Monday morning on top of 4 active projects. Help me build an hour-level plan that addresses the binding constraint first. Draft a message to a silent contractor. Max 100 words. Draft an escalation note presenting options on a new prospect. Max 175 words."
+                            <div class="ai-label">Principal Prompt</div>
+                            <div class="ai-prompt-box">
+                                "Review this MAPA Translation Project Coordinator case and produce a solution for every required deliverable. Use only facts stated in the Candidate Packet. Separate facts, unknowns and assumptions. Identify the real operational problem before proposing actions. Identify binding constraints, dependencies, decision owners, risks, triggers and feasible contingencies. Use project-coordination terminology. Stress-test the recommendation against the seven dimensions in the scoring rubric. Do not invent missing information."
                             </div>
                         </div>
 
                         <div class="ai-full">
-                            <div class="ai-label">Useful Output</div>
-                            <div class="ai-content">
-                                <ul style="list-style:none; padding:0; margin:0;">
-                                    <li>• Structured Monday morning actions</li>
-                                    <li>• Drafted Aristide message</li>
-                                    <li>• Helped sequence the backup plan</li>
+                            <div class="ai-label">Model Consensus</div>
+                            <div class="ai-consensus">
+                                <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; color:#4a4a4a;">
+                                    <li>All three models identified: studio dependency; Aristide response risk; Russian capacity uncertainty; existing commitments vs prospect.</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 1</div>
-                            <div class="ai-content">AI placed Project C source check as step 1 — I moved it to step 4; studio booking is the binding constraint.</div>
+                            <div class="ai-label">Human Correction 1</div>
+                            <div class="ai-content">The reviewer statement about Project C is a reported discrepancy, not proof of a changed source — I corrected this to an unverified discrepancy requiring confirmation.</div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 2</div>
-                            <div class="ai-content">AI's escalation note asked "what should I do?" — I rewrote; managers need options, not open questions.</div>
+                            <div class="ai-label">Human Correction 2</div>
+                            <div class="ai-content">Sable Ridge is a prospect, not an existing commitment — I corrected the framing to avoid treating it as a commitment that must be fulfilled.</div>
                         </div>
 
                         <div class="ai-full ai-rejected">
-                            <div class="ai-label">Correction 3</div>
-                            <div class="ai-content">AI told Aristide to "please prioritize this project." Removed — vague. Replaced with specific deadline and specific ask.</div>
+                            <div class="ai-label">Human Correction 3</div>
+                            <div class="ai-content">Aristide's historical reliability does not eliminate the need for a contingency — I added a backup trigger and sourcing plan regardless of past performance.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Human Correction 4</div>
+                            <div class="ai-content">Backup sourcing must be qualified against the studio deadline — I added the success criterion that the replacement must deliver before Wednesday 2 PM.</div>
+                        </div>
+
+                        <div class="ai-full ai-rejected">
+                            <div class="ai-label">Human Correction 5</div>
+                            <div class="ai-content">"Spanish now / Russian Friday" is not supported by the packet — I removed this invented delivery promise and replaced it with a more general commercial option.</div>
                         </div>
 
                         <div class="ai-full ai-verified">
                             <div class="ai-label">Verification</div>
-                            <div class="ai-content">Confirmed studio booking is non-refundable + next opening 12 days out — makes it the single most time-critical constraint. Confirmed Russian translator list has one name, 14 months inactive — reason not to commit to Sable Ridge. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
+                            <div class="ai-content">All factual claims and decisions were checked against the Candidate Packet. No external facts were used to resolve the scenario. Assessment material is fictional; real client content would remain subject to MAPA's AI/data-handling policy.</div>
                         </div>
 
                         <div class="ai-full ai-human">
                             <div class="ai-label">Human-Owned Judgment</div>
-                            <div class="ai-content">Recommending option 2 to manager (Spanish now, Russian Friday) — only path avoiding both unvetted risk and outright rejection.</div>
+                            <div class="ai-content">Whether current verified capacity supports a commercial commitment to Sable Ridge without displacing existing commitments.</div>
+                        </div>
+
+                        <div class="ai-full">
+                            <div><strong>Effort split:</strong> ~70% human reasoning / ~30% AI-assisted analysis, comparison and drafting</div>
                         </div>
                     </div>
                 </div>
@@ -2360,6 +2696,31 @@
             document.querySelector('.btn-hero')?.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector('#intro')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            // ============================================================
+            // PRESENTATION MODE
+            // ============================================================
+            const presentationToggle = document.getElementById('presentationToggle');
+            let presentationModeActive = false;
+
+            presentationToggle.addEventListener('click', function() {
+                presentationModeActive = !presentationModeActive;
+                document.body.classList.toggle('presentation-mode');
+                this.textContent = presentationModeActive ? 'EXIT' : 'PRESENT';
+            });
+
+            // Keyboard shortcut: P for presentation mode
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'p' || e.key === 'P') {
+                    // Don't intercept if typing in input, textarea, or contenteditable
+                    var tag = e.target.tagName.toLowerCase();
+                    if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) {
+                        return;
+                    }
+                    e.preventDefault();
+                    presentationToggle.click();
+                }
             });
 
             // ============================================================
@@ -2485,15 +2846,6 @@
                         }
                     }
                 }
-            });
-
-            // ============================================================
-            // PRESENTATION MODE
-            // ============================================================
-            var presentationToggle = document.getElementById('presentationToggle');
-            presentationToggle.addEventListener('click', function() {
-                document.body.classList.toggle('presentation-mode');
-                this.textContent = document.body.classList.contains('presentation-mode') ? 'EXIT' : 'PRESENT';
             });
 
             // ============================================================
