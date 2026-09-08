@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAPA · Case Study Preparation Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #6d1e91;
+  --gold: #cb8316;
+  --c1: #2563eb;
+  --c2: #16a34a;
+  --c3: #dc2626;
+  --bg: #f5f3f0;
+  --surface: #ffffff;
+  --border: #e4e0e4;
+  --text: #1a1a1a;
+  --text-mid: #4a4a4a;
+  --text-light: #888;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* TOPBAR */
+.topbar {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+}
+.topbar-title {
+  font-size: 14px; font-weight: 600; color: var(--purple);
+  letter-spacing: 0.3px; white-space: nowrap;
+}
+.topbar-actions, .pill-nav { display:flex; gap:0.4rem; align-items:center; flex-wrap:wrap; }
+.pill, .pill-toggle {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+  padding: 0.3rem 0.7rem; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-mid);
+  background: transparent; cursor: pointer; text-decoration: none;
+  transition: all 0.15s;
+}
+.pill:hover, .pill-toggle:hover { background: var(--purple); color:#fff; border-color: var(--purple); }
+.pill.c1:hover { background: var(--c1); border-color: var(--c1); }
+.pill.c2:hover { background: var(--c2); border-color: var(--c2); }
+.pill.c3:hover { background: var(--c3); border-color: var(--c3); }
+
+/* PAGE */
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3rem;
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+
+/* HEADER */
+.header {
+  background: var(--purple); color: #fff;
+  padding: 1.4rem 1.75rem; border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(109,30,145,0.18);
+}
+.header h1 { font-size: 1.45rem; font-weight: 600; letter-spacing: 0.2px; }
+.header .sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-top: 0.25rem; }
+.header .meta {
+  display: flex; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap;
+  font-size: 0.7rem; color: rgba(255,255,255,0.55);
+}
+.header .meta span {
+  background: rgba(255,255,255,0.1); padding: 0.15rem 0.65rem; border-radius: 20px;
+}
+
+/* OVERVIEW */
+.overview-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 1.25rem 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.overview-card .label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 0.6rem;
+}
+.overview-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 1.25rem;
+}
+.overview-grid ul { list-style: none; }
+.overview-grid li { padding: 0.2rem 0; color: var(--text-mid); font-size: 0.9rem; }
+.overview-grid strong { color: var(--purple); }
+
+/* CASE CARDS */
+.case-card {
+  background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden;
+}
+.case-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.9rem 1.25rem; cursor: pointer; user-select: none;
+  border-bottom: 3px solid var(--purple);
+}
+.case-header.c1 { border-bottom-color: var(--c1); }
+.case-header.c2 { border-bottom-color: var(--c2); }
+.case-header.c3 { border-bottom-color: var(--c3); }
+
+.case-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500;
+  padding: 0.15rem 0.55rem; border-radius: 20px; flex-shrink: 0;
+  color: var(--purple); background: #ede4f0;
+}
+.c1 .case-num { color: var(--c1); background: #eff6ff; }
+.c2 .case-num { color: var(--c2); background: #f0fdf4; }
+.c3 .case-num { color: var(--c3); background: #fef2f2; }
+
+.case-title { font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.case-subtitle { font-size: 0.8rem; color: var(--text-mid); margin-left: 0.15rem; }
+.chevron { margin-left: auto; font-size: 0.75rem; color: var(--text-light); transition: transform 0.2s; }
+.case-card.open .chevron { transform: rotate(180deg); }
+
+.case-body {
+  display: none;
+  padding: 1.4rem 1.4rem 1.6rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+}
+.case-card.open .case-body { display: grid; }
+
+/* UNIFORM BOXES */
+.box, .scenario-box, .priority-box {
+  background: #f8f5f4; border-radius: 8px;
+  padding: 0.85rem 1rem; min-height: 72px;
+  font-size: 0.88rem; line-height: 1.5;
+  display: flex; flex-direction: column; justify-content: flex-start;
+}
+.box { border-left: 3px solid var(--purple); }
+.scenario-box { border: 1px solid var(--border); }
+.priority-box { border-left: 3px solid var(--gold); background: #faf6f0; }
+
+.c1 .box, .c1 .priority-box { border-left-color: var(--c1); }
+.c1 .priority-box { background: #eff6ff; }
+.c1 .scenario-box { background: #eff6ff; border-color: #bfdbfe; }
+
+.c2 .box, .c2 .priority-box { border-left-color: var(--c2); }
+.c2 .priority-box { background: #f0fdf4; }
+.c2 .scenario-box { background: #f0fdf4; border-color: #bbf7d0; }
+
+.c3 .box, .c3 .priority-box { border-left-color: var(--c3); }
+.c3 .priority-box { background: #fef2f2; }
+.c3 .scenario-box { background: #fef2f2; border-color: #fecaca; }
+
+.box ul, .scenario-box ul { margin: 0.2rem 0 0 1rem; padding: 0; }
+.box li, .scenario-box li { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0.15rem; }
+.box strong, .scenario-box strong, .priority-box strong { color: var(--purple); }
+.c1 .box strong, .c1 .priority-box strong { color: var(--c1); }
+.c2 .box strong, .c2 .priority-box strong { color: var(--c2); }
+.c3 .box strong, .c3 .priority-box strong { color: var(--c3); }
+
+/* SECTION */
+.section { margin-bottom: 0.9rem; }
+.section:last-child { margin-bottom: 0; }
+.section-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 0.35rem;
+}
+.c1 .section-label { color: var(--c1); }
+.c2 .section-label { color: var(--c2); }
+.c3 .section-label { color: var(--c3); }
+
+/* PEOPLE */
+.people-list { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.person-tag {
+  font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.55rem;
+  border-radius: 20px; background: #ede4f0; color: var(--text-mid);
+}
+.c1 .person-tag { background: #eff6ff; color: #1e40af; }
+.c2 .person-tag { background: #f0fdf4; color: #14532d; }
+.c3 .person-tag { background: #fef2f2; color: #7f1d1d; }
+
+/* TABLES */
+.table-wrap {
+  overflow-x: auto; border-radius: 8px; border: 1px solid var(--border);
+}
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; min-width: 420px; }
+table th {
+  background: var(--purple); color: #fff; padding: 0.4rem 0.7rem;
+  text-align: left; font-weight: 600; font-size: 0.65rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.c1 table th { background: var(--c1); }
+.c2 table th { background: var(--c2); }
+.c3 table th { background: var(--c3); }
+table td { padding: 0.4rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text); }
+table tr:last-child td { border-bottom: none; }
+
+.tag {
+  display: inline-block; padding: 0.12rem 0.5rem; border-radius: 20px;
+  font-size: 0.65rem; font-weight: 600;
+}
+.tag.green { background: #dcfce7; color: #166534; }
+.tag.yellow { background: #fef3c7; color: #92400e; }
+.tag.red { background: #fee2e2; color: #991b1b; }
+
+/* FUD + COMMITMENT */
+.fud-grid, .commitment-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;
+}
+.fud-card, .commitment-card {
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.6rem 0.75rem; background: #fff; min-height: 78px;
+}
+.fud-card.fact { border-top: 3px solid #16a34a; }
+.fud-card.unknown { border-top: 3px solid var(--gold); }
+.fud-card.decision { border-top: 3px solid var(--purple); }
+.commitment-card.commit { border-left: 4px solid #16a34a; }
+.commitment-card.conditional { border-left: 4px solid var(--gold); }
+.commitment-card.cannot { border-left: 4px solid var(--c3); }
+
+.fud-label, .commitment-label {
+  font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-mid);
+}
+.commitment-card.commit .commitment-label { color: #16a34a; }
+.commitment-card.conditional .commitment-label { color: var(--gold); }
+.commitment-card.cannot .commitment-label { color: var(--c3); }
+.fud-content, .commitment-content { font-size: 0.8rem; color: var(--text); margin-top: 0.2rem; }
+
+/* COLLAPSIBLE NOTES & QA */
+.notes-toggle, .qa-q {
+  background: none; border: none; width: 100%; text-align: left;
+  font-family: inherit; font-size: 0.82rem; font-weight: 600;
+  color: var(--purple); cursor: pointer; padding: 0.45rem 0;
+  display: flex; align-items: center; gap: 0.35rem;
+  border-bottom: 1px dashed var(--border);
+}
+.c1 .notes-toggle, .c1 .qa-q { color: var(--c1); }
+.c2 .notes-toggle, .c2 .qa-q { color: var(--c2); }
+.c3 .notes-toggle, .c3 .qa-q { color: var(--c3); }
+.notes-toggle .arrow, .qa-chevron { font-size: 0.6rem; transition: transform 0.2s; }
+.notes-toggle.open .arrow { transform: rotate(90deg); }
+.qa-item.open .qa-chevron { transform: rotate(180deg); }
+
+.notes-content, .qa-a {
+  display: none; padding: 0.5rem 0.6rem; font-size: 0.82rem;
+  color: var(--text-mid); line-height: 1.5;
+}
+.notes-content.open, .qa-item.open .qa-a { display: block; }
+.notes-content .msg {
+  font-style: italic; background: #f8f5f4; padding: 0.45rem 0.7rem;
+  border-radius: 6px; margin: 0.25rem 0; font-size: 0.8rem;
+}
+
+.qa-item {
+  border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 0.35rem;
+}
+.qa-q { padding: 0.45rem 0.7rem; background: #f8f5f4; margin: 0; border-bottom: none; }
+.c1 .qa-q { background: #eff6ff; }
+.c2 .qa-q { background: #f0fdf4; }
+.c3 .qa-q { background: #fef2f2; }
+.qa-a { border-top: 1px solid var(--border); background: var(--surface); }
+
+/* AI FULL WIDTH */
+.ai-box {
+  background: #1e1e2e; border-radius: 10px; padding: 1rem 1.2rem;
+  color: #cdd6f4; grid-column: 1 / -1; width: 100%;
+}
+.ai-label {
+  font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #7f849c; font-weight: 600; margin-bottom: 0.4rem;
+}
+.ai-row {
+  display: grid; grid-template-columns: 90px 1fr; gap: 0.15rem 0.6rem;
+  font-size: 0.82rem; margin-top: 0.25rem;
+}
+.ai-key { color: #89b4fa; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; }
+.ai-val { color: #cdd6f4; }
+.ai-val em { color: #a6e3a1; font-style: italic; }
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .case-body { grid-template-columns: 1fr; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .fud-grid, .commitment-grid { grid-template-columns: 1fr; }
+  .page { padding: 4rem 0.8rem 2rem; }
+  .header { padding: 1.1rem 1.2rem; }
+  .header h1 { font-size: 1.2rem; }
+  .ai-row { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .topbar { display: none !important; }
+  body { background: #fff; }
+  .case-card, .overview-card { break-inside: avoid; box-shadow: none; }
+  .case-body { display: grid !important; }
+  .notes-content, .qa-a { display: block !important; }
+  .page { padding-top: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-title">MAPA · Notes</span>
+  <div class="topbar-actions">
+    <button class="pill-toggle" onclick="expandAll()">Expand all</button>
+    <button class="pill-toggle" onclick="collapseAll()">Collapse all</button>
+  </div>
+  <nav class="pill-nav">
+    <a class="pill" href="#overview">Overview</a>
+    <a class="pill c1" href="#case1">Case 01</a>
+    <a class="pill c2" href="#case2">Case 02</a>
+    <a class="pill c3" href="#case3">Case 03</a>
+  </nav>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>MAPA · Case Study Preparation Notes</h1>
+    <div class="sub">Translation Project Coordinator · Ariane Lesnyak</div>
+    <div class="meta">
+      <span>Case 01 · Intake &amp; Scope</span>
+      <span>Case 02 · Version Control</span>
+      <span>Case 03 · Capacity &amp; Contingency</span>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="overview-card" id="overview">
+    <div class="label">Working Framework</div>
+    <div class="overview-grid">
+      <div>
+        <ul>
+          <li><strong>Source of truth</strong> → Scope</li>
+          <li><strong>Dependencies</strong> → Capacity</li>
+          <li><strong>Decision owner</strong> → Risk</li>
+          <li><strong>Contingency</strong> → Verification</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><strong>Priority:</strong> protect hard commitments, irreversible dependencies and quality-critical decisions. Move everything else in parallel when possible.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CASE 1 ==================== -->
+  <div class="case-card open" id="case1">
+    <div class="case-header c1" onclick="toggleCase(this)">
+      <span class="case-num">01</span>
+      <span class="case-title">Intake &amp; Scope</span>
+      <span class="case-subtitle">— quote · conflicting files · confidential doc</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="case-body">
+
+      <!-- LEFT -->
+      <div>
+        <div class="section">
+          <div class="section-label">Scenario</div>
+          <div class="scenario-box">
+            Nadia Okonjo (Riverbend Community Health) requests a quote for Spanish, Haitian Creole and Vietnamese. Package has conflicting report versions, unclear scope, confidential material, scanned content and a later Executive Summary. Translation deadline is not explicitly stated.
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">People</div>
+          <div class="people-list">
+            <span class="person-tag">Nadia Okonjo — client contact</span>
+            <span class="person-tag">ES + HC linguists — available</span>
+            <span class="person-tag">Vietnamese — 2-day lead time</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Key Facts</div>
+          <div class="box">
+            <ul>
+              <li>FINAL 6,400 vs v3 6,180 words — later ≠ approved source</li>
+              <li>Financial Appendix: scanned + handwritten notes</li>
+              <li>Captions workbook: one tab marked DO NOT USE</li>
+              <li>Board Roster: CONFIDENTIAL / unrequested</li>
+              <li>Exec Summary: 900 words + changed figures</li>
+              <li>Friday board-packet ≠ confirmed translation deadline</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Main Decision</div>
+          <div class="box">
+            <p><strong>Build the quote provisionally.</strong> Do not turn unconfirmed scope into a firm commitment.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Priority Reasoning</div>
+          <div class="priority-box">
+            <p><strong>Validate gates before committing.</strong> Source approval → scope confirmation → resource feasibility → quote. Run analysis and resource checks in parallel while waiting for Nadia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div>
+        <div class="section">
+          <div class="section-label">Open Questions</div>
+          <div class="box">
+            <ul>
+              <li>Which report version is the approved source?</li>
+              <li>Is the Executive Summary in scope?</li>
+              <li>What is the hard translation deadline?</li>
+              <li>How to handle scanned / handwritten content?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Immediate Actions</div>
+          <div class="box">
+            <ul>
+              <li>Flag source conflict and confidential file</li>
+              <li>Request confirmation of approved version + deadline</li>
+              <li>Check Vietnamese capacity against lead time</li>
+              <li>Prepare provisional quote ranges</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <button class="notes-toggle c1" onclick="toggleNotes(this)">
+            <span class="arrow">▶</span> Client message — Nadia
+          </button>
+          <div class="notes-content">
+            <div class="msg">
+              "Thank you for the materials. Before finalizing the quote I need confirmation on: (1) which report version is the approved source of truth, (2) whether the Executive Summary is in scope, and (3) the hard deadline for delivery. I will hold the confidential Board Roster out of scope unless instructed otherwise."
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Questions to think through</div>
+          <div class="qa-item c1">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Why not quote on the latest file by default?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">Later modification does not equal client approval. Quoting the wrong source creates scope risk and rework.</div>
+          </div>
+          <div class="qa-item c1">
+            <div class="qa-q" onclick="toggleQA(this)">
+              What stays out of the quote until confirmed?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">Unrequested confidential content, unscannable handwritten notes, and any version not confirmed as source of truth.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI FULL WIDTH -->
+      <div class="section" style="grid-column:1/-1;">
+        <div class="ai-box">
+          <div class="ai-label">AI Review</div>
+          <div class="ai-row"><span class="ai-key">Tools</span><span class="ai-val">ChatGPT · Claude · DeepSeek</span></div>
+          <div class="ai-row"><span class="ai-key">Findings</span><span class="ai-val">Source conflict · scope uncertainty · Vietnamese lead time · confidential material</span></div>
+          <div class="ai-row"><span class="ai-key">Corrections</span><span class="ai-val">Do not assume latest file is approved · Do not invent deadline · Keep confidential content out of scope</span></div>
+          <div class="ai-row"><span class="ai-key">Human-owned</span><span class="ai-val">Which open questions must be resolved before a firm quote</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== CASE 2 ==================== -->
+  <div class="case-card open" id="case2">
+    <div class="case-header c2" onclick="toggleCase(this)">
+      <span class="case-num">02</span>
+      <span class="case-title">Version Control</span>
+      <span class="case-subtitle">— 31 comments · print cutoff · safety/legal</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="case-body">
+
+      <!-- LEFT -->
+      <div>
+        <div class="section">
+          <div class="section-label">Scenario</div>
+          <div class="scenario-box">
+            Northline print deadline is Thursday 12 PM ET. Pavel (DTP) cannot work Thursday before 1 PM. 31 client comments arrived late: clear errors, style preferences, glossary conflicts, contradictions, plus safety and legal wording changes.
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">People</div>
+          <div class="people-list">
+            <span class="person-tag">Grant — client contact</span>
+            <span class="person-tag">Pavel — DTP contractor</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Constraints</div>
+          <div class="box">
+            <ul>
+              <li>Thursday 12 PM ET = hard Northline cutoff</li>
+              <li>Pavel unavailable Thursday before 1 PM</li>
+              <li>Chinese page 7 is one line from a page break</li>
+              <li>Safety / legal changes need written confirmation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Main Decision</div>
+          <div class="box">
+            <p><strong>Protect the print cutoff</strong> by triaging comments by risk and decision authority, not by volume.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Priority Reasoning</div>
+          <div class="priority-box">
+            <p><strong>Hard cutoff drives everything.</strong> Resolve safety/legal first (they block DTP). Implement clear errors in parallel. Keep Wednesday for production and Thursday AM as QA buffer.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div>
+        <div class="section">
+          <div class="section-label">Triage</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Category</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td>6 clear errors</td><td><span class="tag green">Implement + verify</span></td></tr>
+                <tr><td>14 style preferences</td><td><span class="tag yellow">Evaluate</span></td></tr>
+                <tr><td>5 glossary conflicts</td><td><span class="tag yellow">Confirm before override</span></td></tr>
+                <tr><td>4 contradictions</td><td><span class="tag yellow">Hold</span></td></tr>
+                <tr><td>Safety wording</td><td><span class="tag red">Written confirmation</span></td></tr>
+                <tr><td>Legal wording</td><td><span class="tag red">Align authoritative source</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Timeline</div>
+          <div class="box">
+            <ul>
+              <li><strong>Wed AM</strong> — triage / confirmations / reserve DTP</li>
+              <li><strong>2 PM</strong> — GO / NO-GO checkpoint</li>
+              <li><strong>Wed PM</strong> — DTP + internal QA</li>
+              <li><strong>Thu AM</strong> — QA / recovery buffer</li>
+              <li><strong>Thu 12 PM ET</strong> — Northline cutoff</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Controls</div>
+          <div class="box">
+            <ul>
+              <li>Verify source before implementation</li>
+              <li>Written confirmation for safety change</li>
+              <li>Preserve glossary consistency</li>
+              <li>Reflow affected Chinese pages</li>
+              <li>Final QA before release</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <button class="notes-toggle c2" onclick="toggleNotes(this)">
+            <span class="arrow">▶</span> Client message — Grant
+          </button>
+          <div class="notes-content">
+            <div class="msg">
+              "Two items need written confirmation: the safety warning and the legal line. The English master is already in prepress. Need response by 2 PM ET today to protect the Thursday deadline."
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <button class="notes-toggle c2" onclick="toggleNotes(this)">
+            <span class="arrow">▶</span> Contractor message — Pavel
+          </button>
+          <div class="notes-content">
+            <div class="msg">
+              "I have six hours of Wednesday capacity. Can you confirm your window and whether you can take two waves — first batch now, second after the client decision point?"
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Questions to think through</div>
+          <div class="qa-item c2">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Why is comment count irrelevant?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">Downstream impact matters more than volume. Safety/legal changes and deadline blockers are the real constraints.</div>
+          </div>
+          <div class="qa-item c2">
+            <div class="qa-q" onclick="toggleQA(this)">
+              What if Grant does not respond?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">Ship only approved changes. Escalate unresolved decisions. Document. Do not miss the press run.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI FULL WIDTH -->
+      <div class="section" style="grid-column:1/-1;">
+        <div class="ai-box">
+          <div class="ai-label">AI Review</div>
+          <div class="ai-row"><span class="ai-key">Tools</span><span class="ai-val">ChatGPT · Claude · DeepSeek</span></div>
+          <div class="ai-row"><span class="ai-key">Findings</span><span class="ai-val">Northline hard constraint · Pavel availability · 31-comment triage · safety/legal special treatment</span></div>
+          <div class="ai-row"><span class="ai-key">Corrections</span><span class="ai-val">Do not invent Pavel’s exact window · Do not treat all comments equally · Do not treat safety/legal as ordinary style edits</span></div>
+          <div class="ai-row"><span class="ai-key">Human-owned</span><span class="ai-val">Which unresolved issues require client confirmation vs internal resolution</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== CASE 3 ==================== -->
+  <div class="case-card open" id="case3">
+    <div class="case-header c3" onclick="toggleCase(this)">
+      <span class="case-num">03</span>
+      <span class="case-title">Capacity &amp; Contingency</span>
+      <span class="case-subtitle">— studio · silent contractor · prospect</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="case-body">
+
+      <!-- LEFT -->
+      <div>
+        <div class="section">
+          <div class="section-label">Scenario</div>
+          <div class="scenario-box">
+            One coordinator covering four committed projects when a high-value prospect arrives. Project D has a non-refundable Wednesday 2–4 PM studio booking requiring a final reviewed Haitian Creole script. Aristide delivered 60% and has not answered three emails since Thursday.
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">People</div>
+          <div class="people-list">
+            <span class="person-tag">D. Aristide — HC translator</span>
+            <span class="person-tag">Manager — commercial owner</span>
+            <span class="person-tag">Russian resource — last worked 14 months ago</span>
+            <span class="person-tag">Sable Ridge — prospect</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Projects</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Project</th><th>Key constraint</th></tr></thead>
+              <tbody>
+                <tr><td>A</td><td>Tue 12 PM</td></tr>
+                <tr><td>B</td><td>Wed 3 PM</td></tr>
+                <tr><td>C</td><td>Thu 5 PM + source discrepancy</td></tr>
+                <tr><td>D</td><td>Wed 2–4 PM studio dependency</td></tr>
+                <tr><td>Sable Ridge</td><td>Wed 5 PM prospect deadline</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Fact / Unknown / Decision</div>
+          <div class="fud-grid">
+            <div class="fud-card fact">
+              <div class="fud-label">FACT</div>
+              <div class="fud-content">Aristide delivered 60% Saturday; no response to 3 emails since Thursday.</div>
+            </div>
+            <div class="fud-card unknown">
+              <div class="fud-label">UNKNOWN</div>
+              <div class="fud-content">Whether remaining script can be completed and reviewed before Wednesday 2 PM.</div>
+            </div>
+            <div class="fud-card decision">
+              <div class="fud-label">DECISION</div>
+              <div class="fud-content">11:30 AM trigger → backup sourcing if necessary.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Main Decision</div>
+          <div class="box">
+            <p><strong>Protect existing commitments and the studio dependency.</strong> Qualify Sable Ridge without committing until Russian capacity is verified.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Priority Reasoning</div>
+          <div class="priority-box">
+            <p><strong>Dependency rigidity drives sequence.</strong> Studio is non-refundable; next opening in 12 days. A is earliest committed delivery. B next. C is conditional. Sable Ridge is an opportunity, not a commitment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div>
+        <div class="section">
+          <div class="section-label">Commitment Position</div>
+          <div class="commitment-grid">
+            <div class="commitment-card commit">
+              <div class="commitment-label">COMMIT</div>
+              <div class="commitment-content">Protect A–D and manage dependencies.</div>
+            </div>
+            <div class="commitment-card conditional">
+              <div class="commitment-label">CONDITIONAL</div>
+              <div class="commitment-content">C depends on source verification.</div>
+            </div>
+            <div class="commitment-card cannot">
+              <div class="commitment-label">CANNOT COMMIT</div>
+              <div class="commitment-content">Sable Ridge before Russian capacity verified.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Backup — Aristide</div>
+          <div class="box">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; line-height:1.7;">
+              Aristide<br>↓ <strong>11:30 AM trigger</strong><br>↓ Qualified internal HC resource<br>↓ Existing agency/vendor<br>↓ Manager / studio decision<br>↓ Reschedule as last resort
+            </div>
+            <p style="margin-top:0.35rem; font-size:0.75rem; color:var(--text-light);">
+              <em>Success criterion: qualified resource delivers final reviewed script before Wednesday 2 PM.</em>
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Critical Distinctions</div>
+          <div class="box">
+            <ul>
+              <li><strong>Aristide’s silence</strong> = risk, not proof of failure</li>
+              <li><strong>Reviewer’s source-change comment</strong> = reported discrepancy, not verified fact</li>
+              <li><strong>Sable Ridge</strong> = prospect, not a commitment</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <button class="notes-toggle c3" onclick="toggleNotes(this)">
+            <span class="arrow">▶</span> Contractor message — Aristide
+          </button>
+          <div class="notes-content">
+            <div class="msg">
+              "Please confirm by 11:30 AM ET today whether you can complete the remaining script in time for review before Wednesday’s 2:00 PM recording session. If I don’t hear from you by then, I’ll activate backup sourcing to protect the studio booking."
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Questions to think through</div>
+          <div class="qa-item c3">
+            <div class="qa-q" onclick="toggleQA(this)">
+              Why D before C?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">Studio is non-refundable; next opening in 12 days. C has longer runway and the source discrepancy can be resolved in parallel.</div>
+          </div>
+          <div class="qa-item c3">
+            <div class="qa-q" onclick="toggleQA(this)">
+              When does backup sourcing become necessary?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">If Aristide does not confirm by 11:30 AM. Silence consumes the recovery window.</div>
+          </div>
+          <div class="qa-item c3">
+            <div class="qa-q" onclick="toggleQA(this)">
+              What would make Sable Ridge commit-able?
+              <span class="qa-chevron">▾</span>
+            </div>
+            <div class="qa-a">Russian capacity, suitability and turnaround verified — without displacing existing commitments.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI FULL WIDTH -->
+      <div class="section" style="grid-column:1/-1;">
+        <div class="ai-box">
+          <div class="ai-label">AI Review</div>
+          <div class="ai-row"><span class="ai-key">Tools</span><span class="ai-val">ChatGPT · Claude · DeepSeek</span></div>
+          <div class="ai-row"><span class="ai-key">Findings</span><span class="ai-val">studio dependency · Aristide risk · Russian capacity · prospect vs commitment</span></div>
+          <div class="ai-row"><span class="ai-key">Corrections</span><span class="ai-val">Source-change report ≠ verified fact · Aristide reliability ≠ eliminates contingency · Unsupported split-delivery option removed</span></div>
+          <div class="ai-row"><span class="ai-key">Human-owned</span><span class="ai-val">Final prioritization · Commitment decisions · Commercial trade-off</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleCase(header) {
+  header.closest('.case-card').classList.toggle('open');
+}
+function toggleQA(qEl) {
+  qEl.closest('.qa-item').classList.toggle('open');
+}
+function toggleNotes(btn) {
+  btn.classList.toggle('open');
+  const content = btn.nextElementSibling;
+  if (content) content.classList.toggle('open');
+}
+function expandAll() {
+  document.querySelectorAll('.case-card').forEach(c => c.classList.add('open'));
+  document.querySelectorAll('.notes-content').forEach(c => c.classList.add('open'));
+  document.querySelectorAll('.notes-toggle').forEach(b => b.classList.add('open'));
+  document.querySelectorAll('.qa-item').forEach(c => c.classList.add('open'));
+}
+function collapseAll() {
+  document.querySelectorAll('.case-card').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.notes-content').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.notes-toggle').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.qa-item').forEach(c => c.classList.remove('open'));
+}
+document.querySelectorAll('.pill[href^="#"]').forEach(pill => {
+  pill.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(pill.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
